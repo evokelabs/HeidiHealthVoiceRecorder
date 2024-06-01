@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, createContext } from 'react'
+import { createContext } from 'react'
 import { LayoutOptions } from './types'
 
 export interface UIContextType {
