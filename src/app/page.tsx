@@ -1,43 +1,15 @@
 'use client'
 
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 
 import { LayoutOptions } from '@/libs/types'
 
 import { Logos } from '@/UI/Logos'
-import LayoutRecordingFinished from '@/Layout/LayoutRecordingFinished'
-import LayoutRecordingInit from '@/Layout/LayoutRecordingInit'
-import LayoutRecordingTranscribe from '@/Layout/LayoutRecordingTranscribe'
-import LayoutRecordingProgressing from '@/Layout/LayoutRecordingProgressing'
 import TranscribeTextArea from '@/UI/TranscribeTextArea'
 import { AudioContext } from '@/libs/AudioContext'
 import { UIContext } from '@/libs/UIContext'
 import useAudioRecording from '@/libs/useAudioRecording'
-
-const useLayoutState = (initialLayout: LayoutOptions) => {
-  const [layout, setLayout] = useState(initialLayout)
-
-  const resetLayout = useCallback(() => {
-    setLayout(LayoutOptions.LayoutRecordingInit)
-  }, [])
-
-  return { layout, setLayout, resetLayout }
-}
-
-const renderLayout = (layout: LayoutOptions) => {
-  switch (layout) {
-    case LayoutOptions.LayoutRecordingInit:
-      return <LayoutRecordingInit />
-    case LayoutOptions.LayoutRecordingProgressing:
-      return <LayoutRecordingProgressing />
-    case LayoutOptions.LayoutRecordingTranscribe:
-      return <LayoutRecordingTranscribe />
-    case LayoutOptions.LayoutRecordingFinished:
-      return <LayoutRecordingFinished />
-    default:
-      return null
-  }
-}
+import useLayoutState, { renderLayout } from '@/libs/useLayoutState'
 
 const Home = () => {
   const { layout, setLayout, resetLayout } = useLayoutState(LayoutOptions.LayoutRecordingInit)

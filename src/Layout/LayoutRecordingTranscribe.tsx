@@ -14,7 +14,7 @@ const LayoutRecordingTranscribe = () => {
   const { setLayout } = useContext(UIContext)
   const { setIsPaused } = useContext(AudioContext)
   return (
-    <div className="flex flex-col md:flex-row justify-center items-center gap-7 ">
+    <div className="flex flex-col md:flex-row justify-center items-center gap-7">
       <div
         onClick={() => {
           setLayout(LayoutOptions.LayoutRecordingProgressing)
