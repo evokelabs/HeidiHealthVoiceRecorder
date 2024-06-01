@@ -6,23 +6,51 @@ import { StopIconSVG } from '@/UI/SVG/StopIconSVG'
 import { LayoutOptions } from '@/app/page'
 import { Dispatch, SetStateAction, useState } from 'react'
 
-const PausedIconButton = ({ setIsPaused }: { setIsPaused: Dispatch<SetStateAction<boolean>> }) => {
+const PausedIconButton = ({
+  setIsPaused,
+  setIsPressed,
+  isPressed,
+}: {
+  setIsPaused: Dispatch<SetStateAction<boolean>>
+  setIsPressed: Dispatch<SetStateAction<boolean>>
+  isPressed: boolean
+}) => {
   return (
-    <div onClick={() => setIsPaused(true)}>
+    <div
+      onClick={() => {
+        setIsPressed(true)
+        setIsPaused(true)
+      }}>
       <MainBigButton
         iconSVG={<PauseIconSVG />}
         caption={'pause recording'}
+        isPressed={isPressed}
+        setIsPressed={setIsPressed}
       />
     </div>
   )
 }
 
-const ResumeIconButton = ({ setIsPaused }: { setIsPaused: Dispatch<SetStateAction<boolean>> }) => {
+const ResumeIconButton = ({
+  setIsPaused,
+  setIsPressed,
+  isPressed,
+}: {
+  setIsPaused: Dispatch<SetStateAction<boolean>>
+  setIsPressed: Dispatch<SetStateAction<boolean>>
+  isPressed: boolean
+}) => {
   return (
-    <div onClick={() => setIsPaused(false)}>
+    <div
+      onClick={() => {
+        setIsPressed(true)
+        setIsPaused(false)
+      }}>
       <MainBigButton
         iconSVG={<RecordIconSVG />}
         caption={'resume recording'}
+        isPressed={isPressed}
+        setIsPressed={setIsPressed}
       />
     </div>
   )
@@ -38,6 +66,7 @@ const LayoutRecordingProgressing = ({
   seconds: number
 }) => {
   const [isPaused, setIsPaused] = useState(false)
+  const [isPressed, setIsPressed] = useState(false)
 
   return (
     <>
@@ -48,7 +77,19 @@ const LayoutRecordingProgressing = ({
         />
       </div>
 
-      {isPaused ? <ResumeIconButton setIsPaused={setIsPaused} /> : <PausedIconButton setIsPaused={setIsPaused} />}
+      {isPaused ? (
+        <ResumeIconButton
+          setIsPressed={setIsPressed}
+          setIsPaused={setIsPaused}
+          isPressed={isPressed}
+        />
+      ) : (
+        <PausedIconButton
+          setIsPressed={setIsPressed}
+          setIsPaused={setIsPaused}
+          isPressed={isPressed}
+        />
+      )}
 
       <RecordingDisplay
         isPaused={isPaused}
