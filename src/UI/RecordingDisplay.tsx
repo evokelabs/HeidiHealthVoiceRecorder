@@ -1,10 +1,11 @@
-import { Dispatch, SetStateAction, useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 
 import { formatTime } from '@/libs/helpers'
 
 import { PauseIconSVG } from './SVG/PauseIconSVG'
 import { RecordIconSVG } from './SVG/RecordIconSVG'
 import { RECORDING_MIC, RECORDING_PAUSED } from '@/libs/constants'
+import { AudioContext } from '@/libs/AudioContext'
 
 const RecordingLEDIcon = () => {
   return (
@@ -22,15 +23,9 @@ const PausedLEDIcon = () => {
   )
 }
 
-const RecordingDisplay = ({
-  isPaused,
-  setSeconds,
-  seconds,
-}: {
-  isPaused: boolean
-  setSeconds: Dispatch<SetStateAction<number>>
-  seconds: number
-}) => {
+const RecordingDisplay = () => {
+  const { isPaused, setSeconds, seconds } = useContext(AudioContext)
+
   const text = isPaused ? RECORDING_PAUSED : RECORDING_MIC
 
   useEffect(() => {

@@ -1,9 +1,11 @@
-import { Dispatch, SetStateAction, useCallback, useEffect } from 'react'
+import { Dispatch, SetStateAction, useCallback, useContext, useEffect } from 'react'
 
 import { formatTime } from '@/libs/helpers'
 
 import { TranscribeIconSVG } from './SVG/TranscribeIconSVG'
 import { OfflineAlert } from './OfflineAlert'
+import { AudioContext } from '@/libs/AudioContext'
+import { UIContext } from '@/libs/UIContext'
 
 const IconSVG = ({ iconSVG }: { iconSVG: JSX.Element }) => {
   return <div className="relative scale-50 md:scale-100 ">{iconSVG}</div>
@@ -20,19 +22,10 @@ const IconTranscribeTimerSVG = ({ seconds }: { seconds: number }) => {
   )
 }
 
-const MainBigButton = ({
-  iconSVG,
-  caption,
-  seconds,
-  isPressed,
-  setIsPressed,
-}: {
-  iconSVG: JSX.Element
-  caption: string
-  seconds?: number
-  isPressed?: boolean
-  setIsPressed?: Dispatch<SetStateAction<boolean>>
-}) => {
+const MainBigButton = ({ iconSVG, caption }: { iconSVG: JSX.Element; caption: string }) => {
+  const { setIsPressed, isPressed } = useContext(UIContext)
+  const { seconds } = useContext(AudioContext)
+
   // Shows the timer length if transcribe SVG and seconds are passed
   const hasTranscribeLength = iconSVG.type === TranscribeIconSVG && seconds
 

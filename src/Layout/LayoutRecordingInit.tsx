@@ -1,12 +1,14 @@
-import { Dispatch, SetStateAction } from 'react'
+import { useContext } from 'react'
 
 import { LayoutOptions } from '@/libs/types'
 import { START_RECORDING } from '@/libs/constants'
 
 import MainBigButton from '@/UI/MainBigButton'
 import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
+import { UIContext } from '@/libs/UIContext'
 
-const LayoutRecordingInit = ({ setLayout }: { setLayout: Dispatch<SetStateAction<LayoutOptions>> }) => {
+const LayoutRecordingInit = () => {
+  const { setLayout } = useContext(UIContext)
   return (
     <div
       onClick={() => {
