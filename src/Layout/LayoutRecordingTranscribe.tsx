@@ -9,10 +9,12 @@ import MainBigButton from '@/UI/MainBigButton'
 import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
 import { TranscribeIconSVG } from '@/UI/SVG/TranscribeIconSVG'
 import { AudioContext } from '@/libs/AudioContext'
+import useUserOffline from '@/libs/useUserOffline'
 
 const LayoutRecordingTranscribe = () => {
   const { setLayout, layoutAnimateIn, layoutAnimateOut } = useContext(UIContext)
   const { setIsPaused } = useContext(AudioContext)
+  const { userIsOffline } = useUserOffline()
 
   //Animation transitions for the layout
   const generateAnimationStyles = (direction: string) => {
@@ -51,7 +53,7 @@ const LayoutRecordingTranscribe = () => {
       </div>
       <div
         className="relative duration-300 ease-out"
-        style={animationLeftStyles}
+        style={{ ...animationLeftStyles, pointerEvents: userIsOffline ? 'none' : 'auto' }}
         onClick={() => setLayout(LayoutOptions.LayoutRecordingFinished)}>
         <MainBigButton
           iconSVG={<TranscribeIconSVG />}
