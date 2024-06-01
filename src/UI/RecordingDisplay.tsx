@@ -1,5 +1,7 @@
+import { Dispatch, SetStateAction, useEffect } from 'react'
+
 import { formatTime } from '@/libs/helpers'
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+
 import { PauseIconSVG } from './SVG/PauseIconSVG'
 import { RecordIconSVG } from './SVG/RecordIconSVG'
 

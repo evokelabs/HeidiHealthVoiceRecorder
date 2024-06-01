@@ -1,8 +1,10 @@
+import { Dispatch, SetStateAction } from 'react'
+
+import { LayoutOptions } from '@/libs/types'
+
 import MainBigButton from '@/UI/MainBigButton'
 import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
 import { TranscribeIconSVG } from '@/UI/SVG/TranscribeIconSVG'
-import { LayoutOptions } from '@/libs/types'
-import { Dispatch, SetStateAction } from 'react'
 
 const LayoutRecordingTranscribe = ({ setLayout, seconds }: { setLayout: Dispatch<SetStateAction<LayoutOptions>>; seconds: number }) => {
   return (

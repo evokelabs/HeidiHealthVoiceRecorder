@@ -1,6 +1,8 @@
+import { Dispatch, SetStateAction, useCallback, useEffect } from 'react'
+
 import { formatTime } from '@/libs/helpers'
+
 import { TranscribeIconSVG } from './SVG/TranscribeIconSVG'
-import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react'
 
 const HOVER_ON = 'duration-150'
 const HOVER_OFF = 'duration-0'

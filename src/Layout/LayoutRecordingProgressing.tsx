@@ -1,10 +1,12 @@
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+
+import { LayoutOptions } from '@/libs/types'
+
 import MainBigButton from '@/UI/MainBigButton'
 import RecordingDisplay from '@/UI/RecordingDisplay'
 import { PauseIconSVG } from '@/UI/SVG/PauseIconSVG'
 import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
 import { StopIconSVG } from '@/UI/SVG/StopIconSVG'
-import { LayoutOptions } from '@/libs/types'
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
 const PausedIconButton = ({
   setIsPaused,
