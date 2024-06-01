@@ -40,7 +40,7 @@ const Home = () => {
       <div className="h-full relative">
         <div className="flex flex-col h-full justify-center">
           <div className="flex flex-col md:flex-row justify-center items-center gap-5 ">
-            {layout === LayoutOptions.LayoutRecordingInit && <LayoutRecordingInit setLayout={setLayout} />}
+            {layout === LayoutOptions.LayoutRecordingInit && <LayoutRecordingInit setLayout={setLayout} setSeconds={setSeconds} />}
             {layout === LayoutOptions.LayoutRecordingProgressing && (
               <LayoutRecordingProgressing
                 setLayout={setLayout}

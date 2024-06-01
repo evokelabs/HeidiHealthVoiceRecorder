@@ -4,7 +4,7 @@ import { PauseIconSVG } from '@/UI/SVG/PauseIconSVG'
 import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
 import { StopIconSVG } from '@/UI/SVG/StopIconSVG'
 import { LayoutOptions } from '@/app/page'
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
 const PausedIconButton = ({
   setIsPaused,
@@ -67,6 +67,10 @@ const LayoutRecordingProgressing = ({
 }) => {
   const [isPaused, setIsPaused] = useState(false)
   const [isPressed, setIsPressed] = useState(false)
+
+  useEffect(() => {
+    setSeconds(0)
+  }, [setSeconds])
 
   return (
     <>

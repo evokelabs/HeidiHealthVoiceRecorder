@@ -27,7 +27,7 @@ export const RecordingDisplay = ({
     return () => {
       clearInterval(intervalId)
     }
-  }, [isPaused])
+  }, [isPaused, setSeconds])
 
   return (
     <div className="flex flex-col justify-center items-center">
