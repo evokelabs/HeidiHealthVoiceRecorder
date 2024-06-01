@@ -4,7 +4,7 @@ import { formatTime } from '@/libs/helpers'
 
 import { PauseIconSVG } from './SVG/PauseIconSVG'
 import { RecordIconSVG } from './SVG/RecordIconSVG'
-import { RECORDING_MIC, RECORDING_PAUSED } from '@/libs/constants'
+import { ERROR_MIC, RECORDING_MIC, RECORDING_PAUSED } from '@/libs/constants'
 import { AudioContext } from '@/libs/AudioContext'
 import { useTimer } from '@/libs/useTimer'
 
@@ -25,9 +25,10 @@ const PausedLEDIcon = () => {
 }
 
 const RecordingDisplay = () => {
-  const { isPaused, setSeconds, seconds, levels } = useContext(AudioContext)
+  const { isPaused, setSeconds, seconds, levels, microphoneError } = useContext(AudioContext)
 
   const text = isPaused ? RECORDING_PAUSED : RECORDING_MIC
+  const errorText = microphoneError && ERROR_MIC
 
   const resetTimer = true
   useTimer(isPaused, resetTimer, seconds, setSeconds)
@@ -46,12 +47,24 @@ const RecordingDisplay = () => {
             )
           })}
         </div>
-        <p className="uppercase text-lg font-semibold text-center select-none">{text}</p>
+        <p className="uppercase text-lg font-semibold text-center select-none"> {errorText ? errorText : text}</p>
       </div>
-      {isPaused ? <PausedLEDIcon /> : <RecordingLEDIcon />}
-      <div className="relative -right-20 ml-2.5 w-fit">
-        <p className="text-lg font-semibold text-start select-none ml-1">{formatTime(seconds)}</p>
-      </div>
+
+      {!errorText ? (
+        <>
+          {isPaused ? <PausedLEDIcon /> : <RecordingLEDIcon />}
+          <div className="relative -right-20 ml-2.5 w-fit">
+            <p className="text-lg font-semibold text-start select-none ml-1">{formatTime(seconds)}</p>
+          </div>
+        </>
+      ) : (
+        <>
+          <PausedLEDIcon />
+          <div className="relative -right-20 ml-2.5 w-fit">
+            <p className="text-lg font-semibold text-start select-none ml-1">{formatTime(0)}</p>
+          </div>
+        </>
+      )}
     </div>
   )
 }

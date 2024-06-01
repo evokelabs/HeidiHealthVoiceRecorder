@@ -14,7 +14,7 @@ import { StopIconSVG } from '@/UI/SVG/StopIconSVG'
 
 const LayoutRecordingProgressing = () => {
   const { setIsPressed, setLayout, layoutAnimateIn, layoutAnimateOut } = useContext(UIContext)
-  const { isPaused, setIsPaused, startRecording, stopRecording } = useContext(AudioContext)
+  const { isPaused, setIsPaused, startRecording, stopRecording, microphoneError } = useContext(AudioContext)
 
   //Start recording on component mount
   useEffect(() => {

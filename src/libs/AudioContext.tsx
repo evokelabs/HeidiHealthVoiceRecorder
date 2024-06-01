@@ -8,6 +8,7 @@ export interface AudioContextType {
   startRecording: () => void
   stopRecording: () => void
   levels: number[]
+  microphoneError: string | null
 }
 export const AudioContext = createContext<AudioContextType>({
   seconds: 0,
@@ -17,4 +18,5 @@ export const AudioContext = createContext<AudioContextType>({
   startRecording: () => {},
   stopRecording: () => {},
   levels: [],
+  microphoneError: null,
 })

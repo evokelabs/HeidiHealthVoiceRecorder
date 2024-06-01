@@ -6,4 +6,5 @@ export const RESUME_RECORDING = 'resume recording'
 export const TRANSCRIBE_AUDIO = 'transcribe audio'
 export const RECORDING_PAUSED = 'recording paused'
 export const RECORDING_MIC = 'recording mic'
+export const ERROR_MIC = 'enable mic'
 export const TRANSITION_TIMING = 150
