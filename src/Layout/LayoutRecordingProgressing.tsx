@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 
 import { LayoutOptions } from '@/libs/types'
 import { PAUSE_RECORDING, RESUME_RECORDING, STOP_RECORDING } from '@/libs/constants'
@@ -14,11 +14,7 @@ import { StopIconSVG } from '@/UI/SVG/StopIconSVG'
 
 const LayoutRecordingProgressing = () => {
   const { setIsPressed, setLayout } = useContext(UIContext)
-  const { setSeconds, isPaused, setIsPaused } = useContext(AudioContext)
-
-  useEffect(() => {
-    setSeconds(0)
-  }, [setSeconds])
+  const { isPaused, setIsPaused } = useContext(AudioContext)
 
   return (
     <>

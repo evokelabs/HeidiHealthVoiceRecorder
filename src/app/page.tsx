@@ -13,30 +13,36 @@ import TranscribeTextArea from '@/UI/TranscribeTextArea'
 import { AudioContext } from '@/libs/AudioContext'
 import { UIContext } from '@/libs/UIContext'
 
-const Home = () => {
-  const [layout, setLayout] = useState(LayoutOptions.LayoutRecordingInit)
-  const [isPressed, setIsPressed] = useState(false)
-  const [isPaused, setIsPaused] = useState(false)
-  const [seconds, setSeconds] = useState(0)
+const useLayoutState = (initialLayout: LayoutOptions) => {
+  const [layout, setLayout] = useState(initialLayout)
 
   const resetLayout = useCallback(() => {
     setLayout(LayoutOptions.LayoutRecordingInit)
   }, [])
 
-  const renderLayout = () => {
-    switch (layout) {
-      case LayoutOptions.LayoutRecordingInit:
-        return <LayoutRecordingInit />
-      case LayoutOptions.LayoutRecordingProgressing:
-        return <LayoutRecordingProgressing />
-      case LayoutOptions.LayoutRecordingTranscribe:
-        return <LayoutRecordingTranscribe />
-      case LayoutOptions.LayoutRecordingFinished:
-        return <LayoutRecordingFinished />
-      default:
-        return null
-    }
+  return { layout, setLayout, resetLayout }
+}
+
+const renderLayout = (layout: LayoutOptions) => {
+  switch (layout) {
+    case LayoutOptions.LayoutRecordingInit:
+      return <LayoutRecordingInit />
+    case LayoutOptions.LayoutRecordingProgressing:
+      return <LayoutRecordingProgressing />
+    case LayoutOptions.LayoutRecordingTranscribe:
+      return <LayoutRecordingTranscribe />
+    case LayoutOptions.LayoutRecordingFinished:
+      return <LayoutRecordingFinished />
+    default:
+      return null
   }
+}
+
+const Home = () => {
+  const { layout, setLayout, resetLayout } = useLayoutState(LayoutOptions.LayoutRecordingInit)
+  const [isPressed, setIsPressed] = useState(false)
+  const [isPaused, setIsPaused] = useState(false)
+  const [seconds, setSeconds] = useState(0)
 
   return (
     <UIContext.Provider value={{ layout, setLayout, isPressed, setIsPressed }}>
@@ -49,7 +55,7 @@ const Home = () => {
           </div>
           <div className="h-full relative">
             <div className="flex flex-col h-full justify-center">
-              <div className="flex flex-col md:flex-row justify-center items-center gap-5 ">{renderLayout()}</div>
+              <div className="flex flex-col md:flex-row justify-center items-center gap-5 ">{renderLayout(layout)}</div>
               {layout === LayoutOptions.LayoutRecordingFinished && <TranscribeTextArea />}
             </div>
           </div>

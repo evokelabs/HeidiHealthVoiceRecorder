@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 
 import { formatTime } from '@/libs/helpers'
 
@@ -6,6 +6,7 @@ import { PauseIconSVG } from './SVG/PauseIconSVG'
 import { RecordIconSVG } from './SVG/RecordIconSVG'
 import { RECORDING_MIC, RECORDING_PAUSED } from '@/libs/constants'
 import { AudioContext } from '@/libs/AudioContext'
+import { useTimer } from '@/libs/useTimer'
 
 const RecordingLEDIcon = () => {
   return (
@@ -28,19 +29,8 @@ const RecordingDisplay = () => {
 
   const text = isPaused ? RECORDING_PAUSED : RECORDING_MIC
 
-  useEffect(() => {
-    let intervalId: NodeJS.Timeout
-
-    if (!isPaused) {
-      intervalId = setInterval(() => {
-        setSeconds((prevSeconds) => prevSeconds + 1)
-      }, 1000)
-    }
-
-    return () => {
-      clearInterval(intervalId)
-    }
-  }, [isPaused, setSeconds])
+  const resetTimer = true
+  useTimer(isPaused, resetTimer, seconds, setSeconds)
 
   return (
     <div className="flex flex-col relative">
