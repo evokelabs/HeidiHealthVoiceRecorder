@@ -1,76 +1,86 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback, Dispatch, SetStateAction } from 'react'
 
-const useAudioRecording = (isPaused: boolean, setIsPaused: (value: boolean) => void) => {
-  const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null)
-  const [audioChunks, setAudioChunks] = useState<Blob[]>([])
+const useAudioRecording = ({ isPaused, setIsPaused }: { isPaused: boolean; setIsPaused: Dispatch<SetStateAction<boolean>> }) => {
+  const [recordedUrl, setRecordedUrl] = useState('')
+  const mediaStream = useRef<MediaStream | null>(null)
+  const mediaRecorder = useRef<MediaRecorder | null>(null)
+  const chunks = useRef<Blob[]>([])
 
-  const startRecording = async () => {
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
-    const recorder = new MediaRecorder(stream)
+  const startRecording = useCallback(async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+      mediaStream.current = stream
+      mediaRecorder.current = new MediaRecorder(stream)
 
-    recorder.addEventListener('dataavailable', (event: BlobEvent) => {
-      setAudioChunks((prev) => [...prev, event.data])
-    })
+      mediaRecorder.current.ondataavailable = (e) => {
+        if (e.data.size > 0) {
+          chunks.current.push(e.data)
+        }
+      }
 
-    recorder.start()
-    setMediaRecorder(recorder)
-  }
+      mediaRecorder.current.onstop = () => {
+        const recordedBlob = new Blob(chunks.current, { type: 'audio/webm' })
+        const url = URL.createObjectURL(recordedBlob)
+        setRecordedUrl(url)
+        chunks.current = []
+        console.log('Recording stopped, blob URL created:', url)
+      }
+
+      mediaRecorder.current.start()
+      console.log('Recording started successfully')
+    } catch (error) {
+      console.error('Error accessing microphone:', error)
+    }
+  }, [])
 
   const stopRecording = () => {
-    if (mediaRecorder) {
-      mediaRecorder.addEventListener('dataavailable', (event: BlobEvent) => {
-        setAudioChunks((prev) => [...prev, event.data])
+    if (mediaRecorder.current && mediaRecorder.current.state === 'recording') {
+      mediaRecorder.current.stop()
+      console.log('Recording stopped')
+    }
 
-        const audioBlob = new Blob(audioChunks)
-        const audioUrl = URL.createObjectURL(audioBlob)
-        const audio = new Audio(audioUrl)
-        audio.play()
+    if (mediaStream.current) {
+      mediaStream.current.getTracks().forEach((track) => {
+        track.stop()
       })
-
-      mediaRecorder.stop()
+      mediaStream.current = null
     }
   }
 
-  // Pause or resume the recording when isPaused changes
+  const pauseRecording = () => {
+    console.log('recording resumed')
+    if (mediaRecorder.current && mediaRecorder.current.state === 'recording') {
+      mediaRecorder.current.pause()
+      setIsPaused(true)
+      console.log('Recording paused')
+    }
+  }
+
+  const resumeRecording = () => {
+    console.log('recording resumed')
+    if (mediaRecorder.current && mediaRecorder.current.state === 'paused') {
+      mediaRecorder.current.resume()
+      setIsPaused(false)
+      console.log('Recording resumed')
+    }
+  }
+
   useEffect(() => {
-    const handlePause = () => {
-      console.log(mediaRecorder?.state) // 'paused'
+    if (isPaused) {
+      pauseRecording()
+    } else {
+      resumeRecording()
     }
-
-    const handleResume = () => {
-      console.log(mediaRecorder?.state) // 'recording'
-    }
-
-    if (mediaRecorder) {
-      if (isPaused) {
-        mediaRecorder.addEventListener('pause', handlePause)
-        mediaRecorder.pause()
-      } else {
-        mediaRecorder.addEventListener('resume', handleResume)
-        mediaRecorder.resume()
-      }
-    }
-
-    // Clean up: remove event listeners
-    return () => {
-      if (mediaRecorder) {
-        mediaRecorder.removeEventListener('pause', handlePause)
-        mediaRecorder.removeEventListener('resume', handleResume)
-      }
-    }
-  }, [isPaused, mediaRecorder]) // Only re-run the effect if isPaused or mediaRecorder changes
+  }, [isPaused])
 
   // Clean up the mediaRecorder and audioChunks when the component unmounts
   useEffect(() => {
     return () => {
-      if (mediaRecorder) {
-        mediaRecorder.stream.getTracks().forEach((track) => track.stop())
-      }
-      setAudioChunks([])
+      stopRecording()
     }
-  }, [mediaRecorder])
+  }, [])
 
-  return { startRecording, stopRecording }
+  return { startRecording, stopRecording, pauseRecording, resumeRecording, recordedUrl, isPaused, setIsPaused }
 }
 
 export default useAudioRecording

@@ -25,7 +25,7 @@ const LayoutRecordingProgressing = () => {
       <div
         onClick={() => {
           stopRecording()
-          setLayout(LayoutOptions.LayoutRecordingTranscribe)
+          // setLayout(LayoutOptions.LayoutRecordingTranscribe)
         }}>
         <MainBigButton
           iconSVG={<StopIconSVG />}
@@ -57,7 +57,7 @@ const LayoutRecordingProgressing = () => {
         </div>
       )}
 
-      <RecordingDisplay />
+      {/* <RecordingDisplay /> */}
     </>
   )
 }

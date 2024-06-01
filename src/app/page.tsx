@@ -44,7 +44,7 @@ const Home = () => {
   const [isPressed, setIsPressed] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
   const [seconds, setSeconds] = useState(0)
-  const { startRecording, stopRecording } = useAudioRecording(isPaused, setIsPaused)
+  const { startRecording, stopRecording } = useAudioRecording({ isPaused, setIsPaused })
 
   return (
     <UIContext.Provider value={{ layout, setLayout, isPressed, setIsPressed }}>
