@@ -44,11 +44,11 @@ const Home = () => {
   const [isPressed, setIsPressed] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
   const [seconds, setSeconds] = useState(0)
-  const { startRecording, stopRecording } = useAudioRecording({ isPaused, setIsPaused })
+  const { startRecording, stopRecording, levels } = useAudioRecording({ isPaused, setIsPaused })
 
   return (
     <UIContext.Provider value={{ layout, setLayout, isPressed, setIsPressed }}>
-      <AudioContext.Provider value={{ seconds, setSeconds, isPaused, setIsPaused, startRecording, stopRecording }}>
+      <AudioContext.Provider value={{ seconds, setSeconds, isPaused, setIsPaused, startRecording, stopRecording, levels }}>
         <main className="w-full h-full relative">
           <div
             className="flex justify-center mt-6 absolute w-full z-10 cursor-pointer"
