@@ -19,7 +19,8 @@ const config: Config = {
         primary: 'colors.primary'
       },
       dropShadow: {
-        DEFAULT: `0.6rem 0.6rem 0 ${PRIMARY_COLOR}`
+        DEFAULT: `0.6rem 0.6rem 0 ${PRIMARY_COLOR}`,
+        inverse: `0.0rem 0.0rem 0 ${PRIMARY_COLOR}`
       }
     }
   },
