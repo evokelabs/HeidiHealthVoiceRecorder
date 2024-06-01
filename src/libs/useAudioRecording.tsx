@@ -26,19 +26,27 @@ const useAudioRecording = ({ isPaused, setIsPaused }: { isPaused: boolean; setIs
       const updateAudioLevels = () => {
         if (analyser.current && dataArray.current) {
           analyser.current.getByteFrequencyData(dataArray.current)
-          const dataCopy = [...dataArray.current] // Create a copy of dataArray.current
+          const dataCopy = Array.from(dataArray.current) // Create a copy of dataArray.current
 
           // Find the maximum value in dataArray.current
           const maxVal = Math.max(...dataCopy)
 
           // Reduce the 1024 values to 12 by averaging every group of values
-          const groupSize = Math.floor(dataCopy.length / 12)
+          const groupSize = Math.floor(dataCopy.length / 16)
           const reducedData = Array.from({ length: 12 }, (_, i) => {
             const group = dataCopy.slice(i * groupSize, (i + 1) * groupSize)
-            const average = Math.round(group.reduce((a, b) => a + b, 0) / group.length) // Round the average to the nearest whole number
+            let average = Math.round(group.reduce((a, b) => a + b, 0) / group.length) // Round the average to the nearest whole number
+
+            // If average is NaN, convert it to 0
+            if (isNaN(average)) {
+              average = 0
+            }
 
             // Normalize the average to a range of 0 to 100
-            const normalizedAverage = Math.round((average / maxVal) * 100)
+            let normalizedAverage = 0
+            if (maxVal !== 0) {
+              normalizedAverage = Math.round((average / maxVal) * 100)
+            }
 
             return normalizedAverage
           })
@@ -104,10 +112,6 @@ const useAudioRecording = ({ isPaused, setIsPaused }: { isPaused: boolean; setIs
       resumeRecording()
     }
   }, [isPaused, pauseRecording, resumeRecording])
-
-  useEffect(() => {
-    console.log('levels', levels)
-  }, [levels])
 
   return { startRecording, stopRecording, pauseRecording, resumeRecording, recordedUrl, isPaused, setIsPaused, levels }
 }
