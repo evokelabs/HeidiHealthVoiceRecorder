@@ -1,6 +1,6 @@
 import { PauseIconSVG } from './SVG/PauseIconSVG'
 
-export const Button = ({ iconSVG, caption }: { iconSVG: JSX.Element; caption: string }) => {
+export const MainBigButton = ({ iconSVG, caption }: { iconSVG: JSX.Element; caption: string }) => {
   return (
     <div className="flex flex-col gap-4">
       <div
@@ -9,7 +9,9 @@ export const Button = ({ iconSVG, caption }: { iconSVG: JSX.Element; caption: st
       >
         <div className="relative scale-50 md:scale-100">{iconSVG}</div>
       </div>
-      <p className="text-center uppercase w-20 md:w-32 font-semibold text-sm md:text-base leading-none md:leading-none">{caption}</p>
+      <p className="text-center uppercase w-20 md:w-32 font-semibold text-sm md:text-base leading-none md:leading-none select-none">
+        {caption}
+      </p>
     </div>
   )
 }

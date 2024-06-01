@@ -13,14 +13,18 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: PRIMARY_COLOR
+        primary: PRIMARY_COLOR,
+        secondary: SECONDARY_COLOR
       },
       textColor: {
         primary: 'colors.primary'
       },
       dropShadow: {
         DEFAULT: `0.6rem 0.6rem 0 ${PRIMARY_COLOR}`,
-        inverse: `0.0rem 0.0rem 0 ${PRIMARY_COLOR}`
+        inverse: `0 0 0 ${PRIMARY_COLOR}`
+      },
+      boxShadow: {
+        inner: `inset 0 0 6px 4px rgba(22, 38, 148, 0.2)`
       }
     }
   },
