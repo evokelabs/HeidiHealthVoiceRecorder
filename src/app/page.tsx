@@ -1,11 +1,13 @@
 'use client'
-import { Logos } from '@/UI/Logos'
+
 import LayoutRecordingFinished from '@/Layout/LayoutRecordingFinished'
 import LayoutRecordingInit from '@/Layout/LayoutRecordingInit'
 import LayoutRecordingTranscribe from '@/Layout/LayoutRecordingTranscribe'
 import LayoutRecordingProgressing from '@/Layout/LayoutRecordingProgressing'
-import { useState } from 'react'
 import TranscribeTextArea from '@/UI/TranscribeTextArea'
+
+import { Logos } from '@/UI/Logos'
+import { useState } from 'react'
 
 export const enum LayoutOptions {
   LayoutRecordingInit,
@@ -18,7 +20,9 @@ const Home = () => {
   const [layout, setLayout] = useState(LayoutOptions.LayoutRecordingInit)
   return (
     <main className="w-full h-full relative">
-      <div className="flex justify-center mt-6 absolute w-full">
+      <div
+        className="flex justify-center mt-6 absolute w-full z-10 cursor-pointer"
+        onClick={() => setLayout(LayoutOptions.LayoutRecordingInit)}>
         <Logos />
       </div>
       <div className="h-full relative">
