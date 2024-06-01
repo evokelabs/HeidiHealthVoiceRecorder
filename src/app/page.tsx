@@ -14,10 +14,10 @@ import { AudioContext } from '@/libs/AudioContext'
 import { UIContext } from '@/libs/UIContext'
 
 const Home = () => {
-  const [layout, setLayout] = useState<LayoutOptions>(LayoutOptions.LayoutRecordingInit)
-  const [isPressed, setIsPressed] = useState<boolean>(false)
-  const [isPaused, setIsPaused] = useState<boolean>(false)
-  const [seconds, setSeconds] = useState<number>(0)
+  const [layout, setLayout] = useState(LayoutOptions.LayoutRecordingInit)
+  const [isPressed, setIsPressed] = useState(false)
+  const [isPaused, setIsPaused] = useState(false)
+  const [seconds, setSeconds] = useState(0)
   return (
     <UIContext.Provider value={{ layout, setLayout, isPressed, setIsPressed }}>
       <AudioContext.Provider value={{ seconds, setSeconds, isPaused, setIsPaused }}>

@@ -4,7 +4,7 @@ export interface AudioContextType {
   seconds: number
   setSeconds: (value: number | ((prevSeconds: number) => number)) => void
   isPaused: boolean
-  setIsPaused: Dispatch<SetStateAction<boolean>>
+  setIsPaused: (value: boolean) => void
 }
 export const AudioContext = createContext<AudioContextType>({
   seconds: 0,
