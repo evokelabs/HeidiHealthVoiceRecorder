@@ -19,7 +19,7 @@ const IconTranscribeTimerSVG = ({ seconds }: { seconds: number }) => {
       <div className="relative scale-50 md:scale-100 bottom-1.5">
         <TranscribeIconSVG />
       </div>
-      <p className="text-lg font-semibold text-center select-none absolute bottom-2">{formatTime(seconds)}</p>
+      <p className="text-lg font-bold text-center select-none absolute bottom-2">{formatTime(seconds)}</p>
     </>
   )
 }
