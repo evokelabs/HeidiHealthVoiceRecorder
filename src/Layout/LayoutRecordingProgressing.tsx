@@ -1,5 +1,5 @@
 import MainBigButton from '@/UI/MainBigButton'
-import { RecordingDisplay } from '@/UI/RecordingDisplay'
+import RecordingDisplay from '@/UI/RecordingDisplay'
 import { PauseIconSVG } from '@/UI/SVG/PauseIconSVG'
 import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
 import { StopIconSVG } from '@/UI/SVG/StopIconSVG'
