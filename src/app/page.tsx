@@ -6,21 +6,8 @@ import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
 import { StopIconSVG } from '@/UI/SVG/StopIconSVG'
 import { TranscribeIconSVG } from '@/UI/SVG/TranscribeIconSVG'
 import { RecordingDisplay } from '@/UI/RecordingDisplay'
-import { useEffect, useState } from 'react'
 
 export default function Home() {
-  const [seconds, setSeconds] = useState(0)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSeconds((prevSeconds) => prevSeconds + 1)
-    }, 1000)
-
-    return () => {
-      clearInterval(interval)
-    }
-  }, [])
-
   return (
     <main className="w-full h-full relative">
       <div className="flex justify-center mt-6 absolute w-full">
@@ -44,7 +31,7 @@ export default function Home() {
             iconSVG={<TranscribeIconSVG />}
             caption={'transcribe audio'}
           />
-          <RecordingDisplay seconds={seconds} />
+          <RecordingDisplay />
         </div>
       </div>
     </main>
