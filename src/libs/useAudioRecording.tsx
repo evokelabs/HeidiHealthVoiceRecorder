@@ -23,11 +23,10 @@ const useAudioRecording = ({ isPaused, setIsPaused }: { isPaused: boolean; setIs
         const url = URL.createObjectURL(recordedBlob)
         setRecordedUrl(url)
         chunks.current = []
-        console.log('Recording stopped, blob URL created:', url)
+        // const audioUrl = URL.createObjectURL(recordedBlob)
       }
 
       mediaRecorder.current.start()
-      console.log('Recording started successfully')
     } catch (error) {
       console.error('Error accessing microphone:', error)
     }
@@ -36,7 +35,6 @@ const useAudioRecording = ({ isPaused, setIsPaused }: { isPaused: boolean; setIs
   const stopRecording = () => {
     if (mediaRecorder.current && mediaRecorder.current.state === 'recording') {
       mediaRecorder.current.stop()
-      console.log('Recording stopped')
     }
 
     if (mediaStream.current) {
@@ -47,23 +45,19 @@ const useAudioRecording = ({ isPaused, setIsPaused }: { isPaused: boolean; setIs
     }
   }
 
-  const pauseRecording = () => {
-    console.log('recording resumed')
+  const pauseRecording = useCallback(() => {
     if (mediaRecorder.current && mediaRecorder.current.state === 'recording') {
       mediaRecorder.current.pause()
       setIsPaused(true)
-      console.log('Recording paused')
     }
-  }
+  }, [setIsPaused])
 
-  const resumeRecording = () => {
-    console.log('recording resumed')
+  const resumeRecording = useCallback(() => {
     if (mediaRecorder.current && mediaRecorder.current.state === 'paused') {
       mediaRecorder.current.resume()
       setIsPaused(false)
-      console.log('Recording resumed')
     }
-  }
+  }, [setIsPaused])
 
   useEffect(() => {
     if (isPaused) {
@@ -71,14 +65,7 @@ const useAudioRecording = ({ isPaused, setIsPaused }: { isPaused: boolean; setIs
     } else {
       resumeRecording()
     }
-  }, [isPaused])
-
-  // Clean up the mediaRecorder and audioChunks when the component unmounts
-  useEffect(() => {
-    return () => {
-      stopRecording()
-    }
-  }, [])
+  }, [isPaused, pauseRecording, resumeRecording])
 
   return { startRecording, stopRecording, pauseRecording, resumeRecording, recordedUrl, isPaused, setIsPaused }
 }
