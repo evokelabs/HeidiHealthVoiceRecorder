@@ -63,7 +63,7 @@ const MainBigButton = ({
         </div>
         {/* {iconSVG.type === TranscribeIconSVG && <OfflineAlert />} */}
       </div>
-      <p className="text-center uppercase w-20 md:w-[7rem] font-semibold text-sm md:text-base leading-none md:leading-none select-none mt-4 relative ">
+      <p className="text-center uppercase w-20 md:w-[7rem] font-semibold text-sm md:text-base leading-none md:leading-none select-none mt-4 relative left-1 ">
         {caption}
       </p>
     </>

@@ -4,6 +4,7 @@ import { LayoutOptions } from '@/libs/types'
 
 import MainBigButton from '@/UI/MainBigButton'
 import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
+import { START_RECORDING } from '@/libs/constants'
 
 const LayoutRecordingInit = ({ setLayout }: { setLayout: Dispatch<SetStateAction<LayoutOptions>> }) => {
   return (
@@ -13,7 +14,7 @@ const LayoutRecordingInit = ({ setLayout }: { setLayout: Dispatch<SetStateAction
       }}>
       <MainBigButton
         iconSVG={<RecordIconSVG />}
-        caption={'start recording'}
+        caption={START_RECORDING}
       />
     </div>
   )

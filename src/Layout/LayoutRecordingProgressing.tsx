@@ -7,6 +7,7 @@ import RecordingDisplay from '@/UI/RecordingDisplay'
 import { PauseIconSVG } from '@/UI/SVG/PauseIconSVG'
 import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
 import { StopIconSVG } from '@/UI/SVG/StopIconSVG'
+import { PAUSE_RECORDING, RESUME_RECORDING, STOP_RECORDING } from '@/libs/constants'
 
 const PausedIconButton = ({
   setIsPaused,
@@ -25,7 +26,7 @@ const PausedIconButton = ({
       }}>
       <MainBigButton
         iconSVG={<PauseIconSVG />}
-        caption={'pause recording'}
+        caption={PAUSE_RECORDING}
         isPressed={isPressed}
         setIsPressed={setIsPressed}
       />
@@ -50,7 +51,7 @@ const ResumeIconButton = ({
       }}>
       <MainBigButton
         iconSVG={<RecordIconSVG />}
-        caption={'resume recording'}
+        caption={RESUME_RECORDING}
         isPressed={isPressed}
         setIsPressed={setIsPressed}
       />
@@ -79,7 +80,7 @@ const LayoutRecordingProgressing = ({
       <div onClick={() => setLayout(LayoutOptions.LayoutRecordingTranscribe)}>
         <MainBigButton
           iconSVG={<StopIconSVG />}
-          caption={'stop recording'}
+          caption={STOP_RECORDING}
         />
       </div>
 

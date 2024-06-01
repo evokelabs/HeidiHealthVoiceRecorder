@@ -4,9 +4,7 @@ import { formatTime } from '@/libs/helpers'
 
 import { PauseIconSVG } from './SVG/PauseIconSVG'
 import { RecordIconSVG } from './SVG/RecordIconSVG'
-
-const RECORDING_PAUSED = 'recording paused'
-const RECORDING = 'recording mic'
+import { RECORDING_MIC, RECORDING_PAUSED } from '@/libs/constants'
 
 const RecordingLEDIcon = () => {
   return (
@@ -33,7 +31,7 @@ const RecordingDisplay = ({
   setSeconds: Dispatch<SetStateAction<number>>
   seconds: number
 }) => {
-  const text = isPaused ? RECORDING_PAUSED : RECORDING
+  const text = isPaused ? RECORDING_PAUSED : RECORDING_MIC
 
   useEffect(() => {
     let intervalId: NodeJS.Timeout
