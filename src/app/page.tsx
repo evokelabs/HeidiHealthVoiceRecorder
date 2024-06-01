@@ -8,16 +8,15 @@ import { TranscribeIconSVG } from '@/UI/SVG/TranscribeIconSVG'
 
 export default function Home() {
   return (
-    <main className="w-full ">
-      <div className="flex justify-center m-6">
+    <main className="w-full relative">
+      <div className="flex justify-center mt-6 absolute w-full">
         <Logos />
-
-        <ErrorIconSVG />
-        <PauseIconSVG />
-        <RecordIconSVG />
-        <StopIconSVG />
-        <TranscribeIconSVG />
-        <Button />
+      </div>
+      <div className="flex flex-col md:flex-row justify-center items-center gap-5 h-screen relative">
+        <Button IconSVG={<RecordIconSVG />} />
+        <Button IconSVG={<PauseIconSVG />} />
+        <Button IconSVG={<StopIconSVG />} />
+        <Button IconSVG={<TranscribeIconSVG />} />
       </div>
     </main>
   )
