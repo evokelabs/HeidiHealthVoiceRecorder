@@ -1,3 +1,4 @@
+import { formatTime } from '@/app/page'
 import { OfflineAlert } from './OfflineAlert'
 import { TranscribeIconSVG } from './SVG/TranscribeIconSVG'
 
@@ -11,7 +12,7 @@ const TranscribeTimerIcon = ({ seconds }: { seconds: number }) => {
       <div className="relative scale-50 md:scale-100 bottom-1.5">
         <TranscribeIconSVG />
       </div>
-      <p className="text-lg font-semibold text-center select-none absolute bottom-2">{seconds}</p>
+      <p className="text-lg font-semibold text-center select-none absolute bottom-2">{formatTime(seconds)}</p>
     </>
   )
 }
@@ -24,7 +25,7 @@ const MainBigButton = ({ iconSVG, caption, seconds }: { iconSVG: JSX.Element; ca
         role="button">
         {iconSVG.type === TranscribeIconSVG && seconds ? <TranscribeTimerIcon seconds={seconds} /> : <IconSVG iconSVG={iconSVG} />}
       </div>
-      {iconSVG.type === TranscribeIconSVG && <OfflineAlert />}
+      {/* {iconSVG.type === TranscribeIconSVG && <OfflineAlert />} */}
       <p className="text-center uppercase w-20 md:w-32 font-semibold text-sm md:text-base leading-none md:leading-none select-none">
         {caption}
       </p>

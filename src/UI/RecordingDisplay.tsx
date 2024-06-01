@@ -1,10 +1,18 @@
-import { useEffect, useState } from 'react'
+import { formatTime } from '@/app/page'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
 const RECORDING_PAUSED = 'recording paused'
 const RECORDING = 'recording mic'
 
-export const RecordingDisplay = ({ isPaused }: { isPaused: boolean }) => {
-  const [seconds, setSeconds] = useState(0)
+export const RecordingDisplay = ({
+  isPaused,
+  setSeconds,
+  seconds,
+}: {
+  isPaused: boolean
+  setSeconds: Dispatch<SetStateAction<number>>
+  seconds: number
+}) => {
   const text = isPaused ? RECORDING_PAUSED : RECORDING
 
   useEffect(() => {
@@ -20,16 +28,6 @@ export const RecordingDisplay = ({ isPaused }: { isPaused: boolean }) => {
       clearInterval(intervalId)
     }
   }, [isPaused])
-
-  const formatTime = (seconds: number) => {
-    const minutes = Math.floor(seconds / 60)
-    const remainingSeconds = seconds % 60
-
-    const formattedMinutes = minutes.toString().padStart(2, '0')
-    const formattedSeconds = remainingSeconds.toString().padStart(2, '0')
-
-    return `${formattedMinutes}:${formattedSeconds}`
-  }
 
   return (
     <div className="flex flex-col justify-center items-center">

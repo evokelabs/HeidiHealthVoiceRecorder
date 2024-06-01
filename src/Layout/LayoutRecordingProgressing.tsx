@@ -28,7 +28,15 @@ const ResumeIconButton = ({ setIsPaused }: { setIsPaused: Dispatch<SetStateActio
   )
 }
 
-const LayoutRecordingProgressing = ({ setLayout }: { setLayout: Dispatch<SetStateAction<LayoutOptions>> }) => {
+const LayoutRecordingProgressing = ({
+  setLayout,
+  setSeconds,
+  seconds,
+}: {
+  setLayout: Dispatch<SetStateAction<LayoutOptions>>
+  setSeconds: Dispatch<SetStateAction<number>>
+  seconds: number
+}) => {
   const [isPaused, setIsPaused] = useState(false)
 
   return (
@@ -42,7 +50,11 @@ const LayoutRecordingProgressing = ({ setLayout }: { setLayout: Dispatch<SetStat
 
       {isPaused ? <ResumeIconButton setIsPaused={setIsPaused} /> : <PausedIconButton setIsPaused={setIsPaused} />}
 
-      <RecordingDisplay isPaused={isPaused} />
+      <RecordingDisplay
+        isPaused={isPaused}
+        setSeconds={setSeconds}
+        seconds={seconds}
+      />
     </>
   )
 }

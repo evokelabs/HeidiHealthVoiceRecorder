@@ -2,10 +2,10 @@ import MainBigButton from '@/UI/MainBigButton'
 import { RecordingDisplay } from '@/UI/RecordingDisplay'
 import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
 import { TranscribeIconSVG } from '@/UI/SVG/TranscribeIconSVG'
-import { LayoutOptions } from '@/app/page'
+import { LayoutOptions, formatTime } from '@/app/page'
 import { Dispatch, SetStateAction } from 'react'
 
-const LayoutRecordingTranscribe = ({ setLayout }: { setLayout: Dispatch<SetStateAction<LayoutOptions>> }) => {
+const LayoutRecordingTranscribe = ({ setLayout, seconds }: { setLayout: Dispatch<SetStateAction<LayoutOptions>>; seconds: number }) => {
   return (
     <>
       <div onClick={() => setLayout(LayoutOptions.LayoutRecordingProgressing)}>
@@ -18,7 +18,7 @@ const LayoutRecordingTranscribe = ({ setLayout }: { setLayout: Dispatch<SetState
         <MainBigButton
           iconSVG={<TranscribeIconSVG />}
           caption={'transcribe audio'}
-          seconds={5}
+          seconds={seconds}
         />
       </div>
     </>
