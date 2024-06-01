@@ -48,21 +48,23 @@ const MainBigButton = ({
     }
   }, [isPressed, resetPressed, setIsPressed])
   return (
-    <div
-      className="flex flex-col gap-4 relative group"
-      onMouseLeave={() => resetPressed()}>
+    <>
       <div
-        className={`w-20 h-20 md:w-[7rem] md:h-[7rem] rounded-full bg-white border-4 border-primary drop-shadow transition-all left-0 top-0 relative cursor-pointer flex flex-col justify-center items-center group-hover:drop-shadow-inverse group-hover:top-2 group-hover:left-2.5  ${
-          isPressed ? HOVER_OFF : HOVER_ON
-        }`}
-        role="button">
-        {iconSVG.type === TranscribeIconSVG && seconds ? <TranscribeTimerIcon seconds={seconds} /> : <IconSVG iconSVG={iconSVG} />}
+        className="flex flex-col gap-4 relative group"
+        onMouseLeave={() => resetPressed()}>
+        <div
+          className={`w-20 h-20 md:w-[7rem] md:h-[7rem] rounded-full bg-white border-4 border-primary drop-shadow transition-all left-0 top-0 relative cursor-pointer flex flex-col justify-center items-center group-hover:drop-shadow-inverse group-hover:top-2 group-hover:left-2.5  ${
+            isPressed ? HOVER_OFF : HOVER_ON
+          }`}
+          role="button">
+          {iconSVG.type === TranscribeIconSVG && seconds ? <TranscribeTimerIcon seconds={seconds} /> : <IconSVG iconSVG={iconSVG} />}
+        </div>
+        {/* {iconSVG.type === TranscribeIconSVG && <OfflineAlert />} */}
       </div>
-      {/* {iconSVG.type === TranscribeIconSVG && <OfflineAlert />} */}
-      <p className="text-center uppercase w-20 md:w-32 font-semibold text-sm md:text-base leading-none md:leading-none select-none">
+      <p className="text-center uppercase w-20 md:w-[7rem] font-semibold text-sm md:text-base leading-none md:leading-none select-none mt-4 relative ">
         {caption}
       </p>
-    </div>
+    </>
   )
 }
 
