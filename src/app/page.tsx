@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import { LayoutOptions } from '@/libs/types'
 
@@ -18,23 +18,38 @@ const Home = () => {
   const [isPressed, setIsPressed] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
   const [seconds, setSeconds] = useState(0)
+
+  const resetLayout = useCallback(() => {
+    setLayout(LayoutOptions.LayoutRecordingInit)
+  }, [])
+
+  const renderLayout = () => {
+    switch (layout) {
+      case LayoutOptions.LayoutRecordingInit:
+        return <LayoutRecordingInit />
+      case LayoutOptions.LayoutRecordingProgressing:
+        return <LayoutRecordingProgressing />
+      case LayoutOptions.LayoutRecordingTranscribe:
+        return <LayoutRecordingTranscribe />
+      case LayoutOptions.LayoutRecordingFinished:
+        return <LayoutRecordingFinished />
+      default:
+        return null
+    }
+  }
+
   return (
     <UIContext.Provider value={{ layout, setLayout, isPressed, setIsPressed }}>
       <AudioContext.Provider value={{ seconds, setSeconds, isPaused, setIsPaused }}>
         <main className="w-full h-full relative">
           <div
             className="flex justify-center mt-6 absolute w-full z-10 cursor-pointer"
-            onClick={() => setLayout(LayoutOptions.LayoutRecordingInit)}>
+            onClick={resetLayout}>
             <Logos />
           </div>
           <div className="h-full relative">
             <div className="flex flex-col h-full justify-center">
-              <div className="flex flex-col md:flex-row justify-center items-center gap-5 ">
-                {layout === LayoutOptions.LayoutRecordingInit && <LayoutRecordingInit />}
-                {layout === LayoutOptions.LayoutRecordingProgressing && <LayoutRecordingProgressing />}
-                {layout === LayoutOptions.LayoutRecordingTranscribe && <LayoutRecordingTranscribe />}
-                {layout === LayoutOptions.LayoutRecordingFinished && <LayoutRecordingFinished />}
-              </div>
+              <div className="flex flex-col md:flex-row justify-center items-center gap-5 ">{renderLayout()}</div>
               {layout === LayoutOptions.LayoutRecordingFinished && <TranscribeTextArea />}
             </div>
           </div>

@@ -63,7 +63,7 @@ const RecordingDisplay = () => {
         <p className="uppercase text-lg font-semibold text-center select-none">{text}</p>
       </div>
       {isPaused ? <PausedLEDIcon /> : <RecordingLEDIcon />}
-      <div className="relative -right-20 ml-1.5">
+      <div className="relative -right-20 ml-1.5 w-fit">
         <p className="text-lg font-semibold text-start select-none">{formatTime(seconds)}</p>
       </div>
     </div>
