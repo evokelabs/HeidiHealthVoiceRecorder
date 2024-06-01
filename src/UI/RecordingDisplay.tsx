@@ -37,10 +37,9 @@ const RecordingDisplay = () => {
       <div className="text-3xl rounded-[23px] bg-white p-4 border-primary border-[2px] w-56 shadow-inner relative overflow-hidden ">
         <div
           className={`w-full absolute flex gap-0.5 left-0 bottom-0 opacity-15 duration-300 transition-all transform scale-y-[-1] ${
-            isPaused ? 'h-1' : 'h-full'
+            isPaused ? 'h-10' : 'h-full'
           }`}>
           {levels.map((level, index) => {
-            console.log(`Height for bar ${index}: ${level}%`) // Log the height value
             return (
               <div
                 key={index}
@@ -53,7 +52,7 @@ const RecordingDisplay = () => {
       </div>
       {isPaused ? <PausedLEDIcon /> : <RecordingLEDIcon />}
       <div className="relative -right-20 ml-1.5 w-fit">
-        <p className="text-lg font-semibold text-start select-none">{formatTime(seconds)}</p>
+        <p className="text-lg font-semibold text-start select-none ml-1">{formatTime(seconds)}</p>
       </div>
     </div>
   )
