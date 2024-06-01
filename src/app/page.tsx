@@ -13,10 +13,10 @@ export default function Home() {
         <Logos />
       </div>
       <div className="flex flex-col md:flex-row justify-center items-center gap-5 h-screen relative">
-        <Button IconSVG={<RecordIconSVG />} />
-        <Button IconSVG={<PauseIconSVG />} />
-        <Button IconSVG={<StopIconSVG />} />
-        <Button IconSVG={<TranscribeIconSVG />} />
+        <Button iconSVG={<RecordIconSVG />} caption={'start recording'} />
+        <Button iconSVG={<PauseIconSVG />} caption={'pause recording'} />
+        <Button iconSVG={<StopIconSVG />} caption={'stop recording'} />
+        <Button iconSVG={<TranscribeIconSVG />} caption={'transcript audio'} />
       </div>
     </main>
   )
