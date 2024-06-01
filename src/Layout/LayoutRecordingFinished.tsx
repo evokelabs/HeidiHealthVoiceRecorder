@@ -1,8 +1,9 @@
+import { Dispatch, SetStateAction } from 'react'
+
+import { LayoutOptions } from '@/libs/types'
+
 import MainBigButton from '@/UI/MainBigButton'
 import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
-import TranscribeTextArea from '@/UI/TranscribeTextArea'
-import { LayoutOptions } from '@/app/page'
-import { Dispatch, SetStateAction } from 'react'
 
 const LayoutRecordingFinished = ({ setLayout }: { setLayout: Dispatch<SetStateAction<LayoutOptions>> }) => {
   return (

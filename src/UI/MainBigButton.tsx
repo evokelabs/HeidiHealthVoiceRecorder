@@ -1,4 +1,4 @@
-import { formatTime } from '@/app/page'
+import { formatTime } from '@/libs/helpers'
 import { TranscribeIconSVG } from './SVG/TranscribeIconSVG'
 import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react'
 

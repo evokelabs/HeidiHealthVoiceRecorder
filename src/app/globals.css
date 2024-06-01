@@ -7,13 +7,6 @@
   --background-rgb: 255, 249, 239;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 22, 38, 148;
-    --background-rgb: 255, 249, 239;
-  }
-}
-
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));

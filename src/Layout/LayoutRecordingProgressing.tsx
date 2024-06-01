@@ -3,7 +3,7 @@ import { RecordingDisplay } from '@/UI/RecordingDisplay'
 import { PauseIconSVG } from '@/UI/SVG/PauseIconSVG'
 import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
 import { StopIconSVG } from '@/UI/SVG/StopIconSVG'
-import { LayoutOptions } from '@/app/page'
+import { LayoutOptions } from '@/libs/types'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
 const PausedIconButton = ({

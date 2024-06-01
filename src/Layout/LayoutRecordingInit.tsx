@@ -1,15 +1,11 @@
-import MainBigButton from '@/UI/MainBigButton'
-import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
-import { LayoutOptions } from '@/app/page'
 import { Dispatch, SetStateAction } from 'react'
 
-const LayoutRecordingInit = ({
-  setLayout,
-  setSeconds,
-}: {
-  setLayout: Dispatch<SetStateAction<LayoutOptions>>
-  setSeconds: Dispatch<SetStateAction<number>>
-}) => {
+import { LayoutOptions } from '@/libs/types'
+
+import MainBigButton from '@/UI/MainBigButton'
+import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
+
+const LayoutRecordingInit = ({ setLayout }: { setLayout: Dispatch<SetStateAction<LayoutOptions>> }) => {
   return (
     <div
       onClick={() => {

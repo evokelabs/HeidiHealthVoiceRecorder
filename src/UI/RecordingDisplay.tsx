@@ -1,4 +1,4 @@
-import { formatTime } from '@/app/page'
+import { formatTime } from '@/libs/helpers'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
 const RECORDING_PAUSED = 'recording paused'
