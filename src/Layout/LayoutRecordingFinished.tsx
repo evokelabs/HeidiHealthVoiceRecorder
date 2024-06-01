@@ -3,9 +3,10 @@ import { useContext } from 'react'
 import { LayoutOptions } from '@/libs/types'
 import { NEW_RECORDING } from '@/libs/constants'
 
+import { UIContext } from '@/libs/UIContext'
+
 import MainBigButton from '@/UI/MainBigButton'
 import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
-import { UIContext } from '@/libs/UIContext'
 
 const LayoutRecordingFinished = () => {
   const { setLayout } = useContext(UIContext)

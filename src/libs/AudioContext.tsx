@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, createContext } from 'react'
 
-interface AudioContextType {
+export interface AudioContextType {
   seconds: number
   setSeconds: (value: number | ((prevSeconds: number) => number)) => void
   isPaused: boolean

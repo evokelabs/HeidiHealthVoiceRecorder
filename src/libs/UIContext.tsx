@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, createContext } from 'react'
 import { LayoutOptions } from './types'
 
-interface UIContextType {
+export interface UIContextType {
   layout: number
   setLayout: Dispatch<SetStateAction<number>>
   isPressed: boolean

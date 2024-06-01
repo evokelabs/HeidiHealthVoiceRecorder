@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useCallback, useContext, useEffect } from 'react'
+import { useCallback, useContext, useEffect } from 'react'
 
 import { formatTime } from '@/libs/helpers'
 
@@ -7,10 +7,12 @@ import { OfflineAlert } from './OfflineAlert'
 import { AudioContext } from '@/libs/AudioContext'
 import { UIContext } from '@/libs/UIContext'
 
+// Default SVG button
 const IconSVG = ({ iconSVG }: { iconSVG: JSX.Element }) => {
   return <div className="relative scale-50 md:scale-100 ">{iconSVG}</div>
 }
 
+// Alternative transcribe button with audio time length
 const IconTranscribeTimerSVG = ({ seconds }: { seconds: number }) => {
   return (
     <>
@@ -26,10 +28,10 @@ const MainBigButton = ({ iconSVG, caption }: { iconSVG: JSX.Element; caption: st
   const { setIsPressed, isPressed } = useContext(UIContext)
   const { seconds } = useContext(AudioContext)
 
-  // Shows the timer length if transcribe SVG and seconds are passed
+  // Shows the timer length in transcribe button if SVG and seconds are passed
   const hasTranscribeLength = iconSVG.type === TranscribeIconSVG && seconds
 
-  // Prevents distracting hover animation on record button while toggling pause/resume
+  // Prevents distracting animation on record button while hovering pause/resume
   const isMouseOverPlayPause = isPressed
 
   const resetPressed = useCallback(() => {
