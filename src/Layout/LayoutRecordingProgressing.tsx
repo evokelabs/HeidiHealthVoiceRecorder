@@ -16,6 +16,17 @@ const LayoutRecordingProgressing = () => {
   const { setIsPressed, setLayout, layoutAnimateIn, layoutAnimateOut } = useContext(UIContext)
   const { isPaused, setIsPaused, startRecording, stopRecording } = useContext(AudioContext)
 
+  //Start recording on component mount
+  useEffect(() => {
+    startRecording()
+  }, [startRecording])
+
+  //Pause or resume recording
+  const togglePause = () => {
+    setIsPaused(!isPaused)
+    setIsPressed(true)
+  }
+
   //Animation transitions for the layout
   const generateAnimationStyles = (direction: string) => {
     const styles = {
@@ -28,29 +39,21 @@ const LayoutRecordingProgressing = () => {
       styles.left = direction === 'left' ? '50px' : '-50px'
     }
 
-    if (layoutAnimateOut) {
-      styles.opacity = 0
-    }
-
     return styles
+  }
+
+  const parentStyle = {
+    opacity: layoutAnimateOut ? 0.25 : 1,
+    transition: 'opacity 250ms',
   }
 
   const animationLeftStyles = generateAnimationStyles('left')
   const animationRightStyles = generateAnimationStyles('right')
 
-  //Start recording on component mount
-  useEffect(() => {
-    startRecording()
-  }, [startRecording])
-
-  //Pause or resume recording
-  const togglePause = () => {
-    setIsPaused(!isPaused)
-    setIsPressed(true)
-  }
-
   return (
-    <div className="flex flex-row justify-center items-center gap-7 relative left-14 w-fit m-auto">
+    <div
+      className="flex flex-row justify-center items-center gap-6 relative left-14 w-fit m-auto"
+      style={parentStyle}>
       <div
         className="relative duration-300 ease-out"
         style={animationLeftStyles}

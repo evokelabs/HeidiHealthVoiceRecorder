@@ -11,11 +11,35 @@ import { TranscribeIconSVG } from '@/UI/SVG/TranscribeIconSVG'
 import { AudioContext } from '@/libs/AudioContext'
 
 const LayoutRecordingTranscribe = () => {
-  const { setLayout } = useContext(UIContext)
+  const { setLayout, layoutAnimateIn, layoutAnimateOut } = useContext(UIContext)
   const { setIsPaused } = useContext(AudioContext)
+
+  //Animation transitions for the layout
+  const generateAnimationStyles = (direction: string) => {
+    const styles = {
+      opacity: 1,
+      left: '0px',
+    }
+
+    if (layoutAnimateIn) {
+      styles.opacity = 0.25
+      styles.left = direction === 'left' ? '60px' : '-70px'
+    }
+
+    if (layoutAnimateOut) {
+      styles.opacity = 0
+    }
+    return styles
+  }
+
+  const animationLeftStyles = generateAnimationStyles('left')
+  const animationRightStyles = generateAnimationStyles('right')
+
   return (
-    <div className="flex flex-col md:flex-row justify-center items-center gap-7">
+    <div className="flex flex-col md:flex-row justify-center items-center gap-6">
       <div
+        className="relative duration-300 ease-out"
+        style={animationRightStyles}
         onClick={() => {
           setLayout(LayoutOptions.LayoutRecordingProgressing)
           setIsPaused(false)
@@ -25,7 +49,10 @@ const LayoutRecordingTranscribe = () => {
           caption={NEW_RECORDING}
         />
       </div>
-      <div onClick={() => setLayout(LayoutOptions.LayoutRecordingFinished)}>
+      <div
+        className="relative duration-300 ease-out"
+        style={animationLeftStyles}
+        onClick={() => setLayout(LayoutOptions.LayoutRecordingFinished)}>
         <MainBigButton
           iconSVG={<TranscribeIconSVG />}
           caption={TRANSCRIBE_AUDIO}

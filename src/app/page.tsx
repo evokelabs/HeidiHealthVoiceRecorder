@@ -5,7 +5,6 @@ import { useState } from 'react'
 import { LayoutOptions } from '@/libs/types'
 
 import { Logos } from '@/UI/Logos'
-import TranscribeTextArea from '@/UI/TranscribeTextArea'
 import { AudioContext } from '@/libs/AudioContext'
 import { UIContext } from '@/libs/UIContext'
 import useAudioRecording from '@/libs/useAudioRecording'
@@ -28,10 +27,7 @@ const Home = () => {
             <Logos />
           </div>
           <div className="h-full relative">
-            <div className="flex flex-col h-full justify-center">
-              {renderLayout(layout)}
-              {layout === LayoutOptions.LayoutRecordingFinished && <TranscribeTextArea />}
-            </div>
+            <div className="flex flex-col h-full justify-center">{renderLayout(layout)}</div>
           </div>
         </main>
       </AudioContext.Provider>

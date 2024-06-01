@@ -12,7 +12,7 @@ const LayoutRecordingInit = () => {
   const { setLayout, setIsPressed } = useContext(UIContext)
 
   return (
-    <div className="flex flex-col md:flex-row justify-center items-center gap-5 relative">
+    <div className="flex flex-col md:flex-row justify-center items-center gap-5 duration-200 relative">
       <div
         onClick={() => {
           setIsPressed(true)
