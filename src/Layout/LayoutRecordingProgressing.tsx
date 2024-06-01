@@ -21,7 +21,7 @@ const LayoutRecordingProgressing = () => {
   }, [startRecording])
 
   return (
-    <>
+    <div className="flex flex-row justify-center items-center gap-7 relative left-14 w-fit m-auto">
       <div
         onClick={() => {
           stopRecording()
@@ -58,7 +58,7 @@ const LayoutRecordingProgressing = () => {
       )}
 
       <RecordingDisplay />
-    </>
+    </div>
   )
 }
 export default LayoutRecordingProgressing

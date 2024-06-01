@@ -13,7 +13,7 @@ const LayoutRecordingFinished = () => {
   const { setLayout } = useContext(UIContext)
   const { setIsPaused } = useContext(AudioContext)
   return (
-    <>
+    <div className="flex flex-col md:flex-row justify-center items-center gap-5 ">
       <div
         onClick={() => {
           setLayout(LayoutOptions.LayoutRecordingProgressing)
@@ -24,7 +24,7 @@ const LayoutRecordingFinished = () => {
           caption={NEW_RECORDING}
         />
       </div>
-    </>
+    </div>
   )
 }
 export default LayoutRecordingFinished

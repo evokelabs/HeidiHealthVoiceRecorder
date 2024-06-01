@@ -12,9 +12,9 @@ import { AudioContext } from '@/libs/AudioContext'
 
 const LayoutRecordingTranscribe = () => {
   const { setLayout } = useContext(UIContext)
-  const { isPaused, setIsPaused, startRecording, stopRecording } = useContext(AudioContext)
+  const { setIsPaused } = useContext(AudioContext)
   return (
-    <>
+    <div className="flex flex-col md:flex-row justify-center items-center gap-7 ">
       <div
         onClick={() => {
           setLayout(LayoutOptions.LayoutRecordingProgressing)
@@ -31,7 +31,7 @@ const LayoutRecordingTranscribe = () => {
           caption={TRANSCRIBE_AUDIO}
         />
       </div>
-    </>
+    </div>
   )
 }
 export default LayoutRecordingTranscribe

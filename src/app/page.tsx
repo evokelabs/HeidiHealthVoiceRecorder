@@ -49,7 +49,7 @@ const Home = () => {
   return (
     <UIContext.Provider value={{ layout, setLayout, isPressed, setIsPressed }}>
       <AudioContext.Provider value={{ seconds, setSeconds, isPaused, setIsPaused, startRecording, stopRecording, levels }}>
-        <main className="w-full h-full relative">
+        <main className="w-full h-full relative m-auto max-w-screen-2xl">
           <div
             className="flex justify-center mt-6 absolute w-full z-10 cursor-pointer"
             onClick={resetLayout}>
@@ -57,7 +57,7 @@ const Home = () => {
           </div>
           <div className="h-full relative">
             <div className="flex flex-col h-full justify-center">
-              <div className="flex flex-col md:flex-row justify-center items-center gap-5 ">{renderLayout(layout)}</div>
+              {renderLayout(layout)}
               {layout === LayoutOptions.LayoutRecordingFinished && <TranscribeTextArea />}
             </div>
           </div>
