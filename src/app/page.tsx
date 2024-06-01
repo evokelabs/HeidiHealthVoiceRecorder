@@ -30,6 +30,10 @@ export default function Home() {
           <MainBigButton
             iconSVG={<TranscribeIconSVG />}
             caption={'transcribe audio'}
+          />
+          <MainBigButton
+            iconSVG={<TranscribeIconSVG />}
+            caption={'transcribe audio'}
             seconds={5}
           />
           <RecordingDisplay />

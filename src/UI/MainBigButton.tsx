@@ -1,3 +1,4 @@
+import { OfflineAlert } from './OfflineAlert'
 import { TranscribeIconSVG } from './SVG/TranscribeIconSVG'
 
 const IconSVG = ({ iconSVG }: { iconSVG: JSX.Element }) => {
@@ -23,7 +24,7 @@ const MainBigButton = ({ iconSVG, caption, seconds }: { iconSVG: JSX.Element; ca
         role="button">
         {iconSVG.type === TranscribeIconSVG && seconds ? <TranscribeTimerIcon seconds={seconds} /> : <IconSVG iconSVG={iconSVG} />}
       </div>
-
+      {iconSVG.type === TranscribeIconSVG && <OfflineAlert />}
       <p className="text-center uppercase w-20 md:w-32 font-semibold text-sm md:text-base leading-none md:leading-none select-none">
         {caption}
       </p>
