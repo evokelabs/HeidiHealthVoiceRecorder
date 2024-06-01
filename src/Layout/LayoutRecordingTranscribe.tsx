@@ -1,11 +1,11 @@
 import { Dispatch, SetStateAction } from 'react'
 
 import { LayoutOptions } from '@/libs/types'
+import { NEW_RECORDING, TRANSCRIBE_AUDIO } from '@/libs/constants'
 
 import MainBigButton from '@/UI/MainBigButton'
 import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
 import { TranscribeIconSVG } from '@/UI/SVG/TranscribeIconSVG'
-import { NEW_RECORDING, TRANSCRIBE_AUDIO } from '@/libs/constants'
 
 const LayoutRecordingTranscribe = ({ setLayout, seconds }: { setLayout: Dispatch<SetStateAction<LayoutOptions>>; seconds: number }) => {
   return (

@@ -1,10 +1,10 @@
 import { Dispatch, SetStateAction } from 'react'
 
 import { LayoutOptions } from '@/libs/types'
+import { NEW_RECORDING } from '@/libs/constants'
 
 import MainBigButton from '@/UI/MainBigButton'
 import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
-import { NEW_RECORDING } from '@/libs/constants'
 
 const LayoutRecordingFinished = ({ setLayout }: { setLayout: Dispatch<SetStateAction<LayoutOptions>> }) => {
   return (
