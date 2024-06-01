@@ -12,6 +12,7 @@ import LayoutRecordingProgressing from '@/Layout/LayoutRecordingProgressing'
 import TranscribeTextArea from '@/UI/TranscribeTextArea'
 import { AudioContext } from '@/libs/AudioContext'
 import { UIContext } from '@/libs/UIContext'
+import useAudioRecording from '@/libs/useAudioRecording'
 
 const useLayoutState = (initialLayout: LayoutOptions) => {
   const [layout, setLayout] = useState(initialLayout)
@@ -43,10 +44,11 @@ const Home = () => {
   const [isPressed, setIsPressed] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
   const [seconds, setSeconds] = useState(0)
+  const { startRecording, stopRecording } = useAudioRecording(isPaused, setIsPaused)
 
   return (
     <UIContext.Provider value={{ layout, setLayout, isPressed, setIsPressed }}>
-      <AudioContext.Provider value={{ seconds, setSeconds, isPaused, setIsPaused }}>
+      <AudioContext.Provider value={{ seconds, setSeconds, isPaused, setIsPaused, startRecording, stopRecording }}>
         <main className="w-full h-full relative">
           <div
             className="flex justify-center mt-6 absolute w-full z-10 cursor-pointer"

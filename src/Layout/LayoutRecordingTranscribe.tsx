@@ -12,7 +12,7 @@ import { AudioContext } from '@/libs/AudioContext'
 
 const LayoutRecordingTranscribe = () => {
   const { setLayout } = useContext(UIContext)
-  const { setIsPaused } = useContext(AudioContext)
+  const { isPaused, setIsPaused, startRecording, stopRecording } = useContext(AudioContext)
   return (
     <>
       <div

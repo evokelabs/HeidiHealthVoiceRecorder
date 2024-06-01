@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 
 import { LayoutOptions } from '@/libs/types'
 import { PAUSE_RECORDING, RESUME_RECORDING, STOP_RECORDING } from '@/libs/constants'
@@ -14,11 +14,19 @@ import { StopIconSVG } from '@/UI/SVG/StopIconSVG'
 
 const LayoutRecordingProgressing = () => {
   const { setIsPressed, setLayout } = useContext(UIContext)
-  const { isPaused, setIsPaused } = useContext(AudioContext)
+  const { isPaused, setIsPaused, startRecording, stopRecording } = useContext(AudioContext)
+
+  useEffect(() => {
+    startRecording()
+  }, [startRecording])
 
   return (
     <>
-      <div onClick={() => setLayout(LayoutOptions.LayoutRecordingTranscribe)}>
+      <div
+        onClick={() => {
+          stopRecording()
+          setLayout(LayoutOptions.LayoutRecordingTranscribe)
+        }}>
         <MainBigButton
           iconSVG={<StopIconSVG />}
           caption={STOP_RECORDING}
