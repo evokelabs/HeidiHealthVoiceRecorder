@@ -28,13 +28,19 @@ const useAudioRecording = ({ isPaused, setIsPaused }: { isPaused: boolean; setIs
           analyser.current.getByteFrequencyData(dataArray.current)
           const dataCopy = Array.from(dataArray.current) // Create a copy of dataArray.current
 
-          // Find the maximum value in dataArray.current
-          const maxVal = Math.max(...dataCopy)
+          // Apply a logarithmic scale to the frequency data
+          const logDataCopy = dataCopy.map((value, index, array) => {
+            const logIndex = Math.round(Math.log10(index + 1) * (array.length / Math.log10(array.length)))
+            return array[logIndex] || value
+          })
+
+          // Set the maximum value
+          const maxVal = 10
 
           // Reduce the 1024 values to 12 by averaging every group of values
-          const groupSize = Math.floor(dataCopy.length / 16)
+          const groupSize = Math.floor(logDataCopy.length / 240)
           const reducedData = Array.from({ length: 12 }, (_, i) => {
-            const group = dataCopy.slice(i * groupSize, (i + 1) * groupSize)
+            const group = logDataCopy.slice(i * groupSize, (i + 1) * groupSize)
             let average = Math.round(group.reduce((a, b) => a + b, 0) / group.length) // Round the average to the nearest whole number
 
             // If average is NaN, convert it to 0
@@ -42,11 +48,8 @@ const useAudioRecording = ({ isPaused, setIsPaused }: { isPaused: boolean; setIs
               average = 0
             }
 
-            // Normalize the average to a range of 0 to 100
-            let normalizedAverage = 0
-            if (maxVal !== 0) {
-              normalizedAverage = Math.round((average / maxVal) * 100)
-            }
+            let normalizedAverage = 5
+            normalizedAverage += Math.round((average / maxVal) * 5) // Normalize the average to a range of 30 to 200
 
             return normalizedAverage
           })
@@ -55,7 +58,7 @@ const useAudioRecording = ({ isPaused, setIsPaused }: { isPaused: boolean; setIs
         }
         requestAnimationFrame(updateAudioLevels)
       }
-      setTimeout(updateAudioLevels, 1000)
+      setTimeout(updateAudioLevels, 50)
 
       updateAudioLevels()
 

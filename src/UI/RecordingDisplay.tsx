@@ -25,7 +25,7 @@ const PausedLEDIcon = () => {
 }
 
 const RecordingDisplay = () => {
-  const { isPaused, setSeconds, seconds } = useContext(AudioContext)
+  const { isPaused, setSeconds, seconds, levels } = useContext(AudioContext)
 
   const text = isPaused ? RECORDING_PAUSED : RECORDING_MIC
 
@@ -36,19 +36,18 @@ const RecordingDisplay = () => {
     <div className="flex flex-col relative">
       <div className="text-3xl rounded-[23px] bg-white p-4 border-primary border-[2px] w-56 shadow-inner relative overflow-hidden ">
         <div
-          className={`w-full absolute flex gap-0.5 left-0 bottom-0 opacity-15 duration-300 transition-all ${isPaused ? 'h-1' : 'h-full'}`}>
-          <div className="bg-primary w-6 h-full"></div>
-          <div className="bg-primary w-6 h-full"></div>
-          <div className="bg-primary w-6 h-full"></div>
-          <div className="bg-primary w-6 h-full"></div>
-          <div className="bg-primary w-6 h-full"></div>
-          <div className="bg-primary w-6 h-full"></div>
-          <div className="bg-primary w-6 h-full"></div>
-          <div className="bg-primary w-6 h-full"></div>
-          <div className="bg-primary w-6 h-full"></div>
-          <div className="bg-primary w-6 h-full"></div>
-          <div className="bg-primary w-6 h-full"></div>
-          <div className="bg-primary w-6 h-full"></div>
+          className={`w-full absolute flex gap-0.5 left-0 bottom-0 opacity-15 duration-300 transition-all transform scale-y-[-1] ${
+            isPaused ? 'h-1' : 'h-full'
+          }`}>
+          {levels.map((level, index) => {
+            console.log(`Height for bar ${index}: ${level}%`) // Log the height value
+            return (
+              <div
+                key={index}
+                style={{ height: `${level}%` }}
+                className={`bg-primary w-6 transition-height duration-0 `}></div>
+            )
+          })}
         </div>
         <p className="uppercase text-lg font-semibold text-center select-none">{text}</p>
       </div>
