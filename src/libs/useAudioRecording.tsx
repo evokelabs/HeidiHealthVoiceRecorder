@@ -10,6 +10,9 @@ const useAudioRecording = ({ isPaused, setIsPaused }: { isPaused: boolean; setIs
   const analyser = useRef<null | AnalyserNode>(null)
   const dataArray = useRef<null | Uint8Array>(null)
 
+  const isPausedRef = useRef(isPaused)
+  isPausedRef.current = isPaused
+
   const startRecording = useCallback(async () => {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
     mediaStream.current = stream
@@ -23,6 +26,7 @@ const useAudioRecording = ({ isPaused, setIsPaused }: { isPaused: boolean; setIs
     source.connect(analyser.current)
 
     const updateAudioLevels = () => {
+      if (isPausedRef.current) return
       if (analyser.current && dataArray.current) {
         analyser.current.getByteFrequencyData(dataArray.current)
         const dataCopy = Array.from(dataArray.current)

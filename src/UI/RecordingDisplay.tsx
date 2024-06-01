@@ -10,7 +10,7 @@ import { useTimer } from '@/libs/useTimer'
 
 const RecordingLEDIcon = () => {
   return (
-    <div className="absolute animate-pulse -bottom-3.5 left-12 scale-[20%]">
+    <div className="absolute animate-pulse -bottom-3.5 left-14 scale-[20%]">
       <RecordIconSVG />
     </div>
   )
@@ -18,7 +18,7 @@ const RecordingLEDIcon = () => {
 
 const PausedLEDIcon = () => {
   return (
-    <div className="absolute scale-[21%] -bottom-[0.75em] left-[3.35em]">
+    <div className="absolute scale-[21%] -bottom-[0.75em] left-[3.87em]">
       <PauseIconSVG />
     </div>
   )
@@ -36,22 +36,20 @@ const RecordingDisplay = () => {
     <div className="flex flex-col relative">
       <div className="text-3xl rounded-[23px] bg-white p-4 border-primary border-[2px] w-56 shadow-inner relative overflow-hidden ">
         <div
-          className={`w-full absolute flex gap-0.5 left-0 bottom-0 opacity-15 duration-300 transition-all transform scale-y-[-1] ${
-            isPaused ? 'h-10' : 'h-full'
-          }`}>
+          className={`w-full absolute flex gap-0.5 left-0 bottom-0 opacity-15 duration-300 transition-all transform scale-y-[-1] h-full`}>
           {levels.map((level, index) => {
             return (
               <div
                 key={index}
                 style={{ height: `${level}%` }}
-                className={`bg-primary w-6 transition-height duration-0 `}></div>
+                className={`bg-primary w-6 transition-height duration-[50ms] `}></div>
             )
           })}
         </div>
         <p className="uppercase text-lg font-semibold text-center select-none">{text}</p>
       </div>
       {isPaused ? <PausedLEDIcon /> : <RecordingLEDIcon />}
-      <div className="relative -right-20 ml-1.5 w-fit">
+      <div className="relative -right-20 ml-2.5 w-fit">
         <p className="text-lg font-semibold text-start select-none ml-1">{formatTime(seconds)}</p>
       </div>
     </div>
