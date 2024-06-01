@@ -1,5 +1,8 @@
 import type { Config } from 'tailwindcss'
 
+const PRIMARY_COLOR = '#162694'
+const SECONDARY_COLOR = '#FFF9EF'
+
 const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -8,7 +11,17 @@ const config: Config = {
     './src/ui/**/*.{js,ts,jsx,tsx,mdx}'
   ],
   theme: {
-    extend: {}
+    extend: {
+      colors: {
+        primary: PRIMARY_COLOR
+      },
+      textColor: {
+        primary: 'colors.primary'
+      },
+      dropShadow: {
+        DEFAULT: `0.6rem 0.6rem 0 ${PRIMARY_COLOR}`
+      }
+    }
   },
   plugins: []
 }

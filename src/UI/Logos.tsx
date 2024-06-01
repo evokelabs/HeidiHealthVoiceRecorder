@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import LogosImg from './../../public/img/logos.webp'
-const Logos = () => {
+export const Logos = () => {
   return (
     <div className="flex flex-row items-center gap-1">
       <Image src={LogosImg} alt="Evoke Labs & Heidi Health Logo" priority width={170} />
@@ -12,5 +12,3 @@ const Logos = () => {
     </div>
   )
 }
-
-export default Logos
