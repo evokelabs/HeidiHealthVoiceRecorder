@@ -1,5 +1,5 @@
 'use client'
-import { MainBigButton } from '@/UI/MainBigButton'
+import MainBigButton from '@/UI/MainBigButton'
 import { Logos } from '@/UI/Logos'
 import { PauseIconSVG } from '@/UI/SVG/PauseIconSVG'
 import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
@@ -30,6 +30,7 @@ export default function Home() {
           <MainBigButton
             iconSVG={<TranscribeIconSVG />}
             caption={'transcribe audio'}
+            seconds={5}
           />
           <RecordingDisplay />
         </div>
