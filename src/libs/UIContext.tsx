@@ -6,6 +6,8 @@ export interface UIContextType {
   setLayout: (value: LayoutOptions) => void
   isPressed: boolean
   setIsPressed: (value: boolean) => void
+  layoutAnimateIn: boolean
+  layoutAnimateOut: boolean
 }
 
 export const UIContext = createContext<UIContextType>({
@@ -13,4 +15,6 @@ export const UIContext = createContext<UIContextType>({
   setLayout: () => {},
   isPressed: false,
   setIsPressed: () => {},
+  layoutAnimateIn: false,
+  layoutAnimateOut: false,
 })

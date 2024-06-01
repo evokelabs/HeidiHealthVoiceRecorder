@@ -21,33 +21,38 @@ export const renderLayout = (layout: LayoutOptions) => {
   }
 }
 
-const useLayoutState = (initialLayout: LayoutOptions) => {
+export const useLayoutState = (initialLayout: LayoutOptions) => {
   const [layout, setLayout] = useState(initialLayout)
-  const [animate, setAnimate] = useState(false)
+  const [layoutAnimateIn, setLayoutAnimateIn] = useState(false)
+  const [layoutAnimateOut, setLayoutAnimateOut] = useState(false)
 
-  const triggerAnimation = useCallback(() => {
-    setAnimate(true)
+  const triggerAnimationIn = useCallback(() => {
+    setLayoutAnimateIn(true)
     setTimeout(() => {
-      setAnimate(false)
+      setLayoutAnimateIn(false)
+    }, TRANSITION_TIMING)
+  }, [])
+
+  const triggerAnimationOut = useCallback(() => {
+    setLayoutAnimateOut(true)
+    setTimeout(() => {
+      setLayoutAnimateOut(false)
     }, TRANSITION_TIMING)
   }, [])
 
   const changeLayout = useCallback(
     (newLayout: LayoutOptions) => {
-      triggerAnimation()
+      triggerAnimationOut()
       setTimeout(() => {
-        triggerAnimation()
+        triggerAnimationIn()
         setLayout(newLayout)
       }, TRANSITION_TIMING)
     },
-    [triggerAnimation]
+    [triggerAnimationIn, triggerAnimationOut]
   )
-
   const resetLayout = useCallback(() => {
     changeLayout(LayoutOptions.LayoutRecordingInit)
   }, [changeLayout])
 
-  return { layout, setLayout: changeLayout, resetLayout, animate }
+  return { layout, setLayout: changeLayout, resetLayout, layoutAnimateIn, layoutAnimateOut }
 }
-
-export default useLayoutState

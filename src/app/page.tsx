@@ -9,17 +9,17 @@ import TranscribeTextArea from '@/UI/TranscribeTextArea'
 import { AudioContext } from '@/libs/AudioContext'
 import { UIContext } from '@/libs/UIContext'
 import useAudioRecording from '@/libs/useAudioRecording'
-import useLayoutState, { renderLayout } from '@/libs/useLayoutState'
+import { renderLayout, useLayoutState } from '@/libs/useLayoutState'
 
 const Home = () => {
-  const { layout, setLayout, resetLayout } = useLayoutState(LayoutOptions.LayoutRecordingInit)
+  const { layout, setLayout, resetLayout, layoutAnimateIn, layoutAnimateOut } = useLayoutState(LayoutOptions.LayoutRecordingInit)
   const [isPressed, setIsPressed] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
   const [seconds, setSeconds] = useState(0)
   const { startRecording, stopRecording, levels } = useAudioRecording({ isPaused, setIsPaused })
 
   return (
-    <UIContext.Provider value={{ layout, setLayout, isPressed, setIsPressed }}>
+    <UIContext.Provider value={{ layout, setLayout, isPressed, setIsPressed, layoutAnimateOut, layoutAnimateIn }}>
       <AudioContext.Provider value={{ seconds, setSeconds, isPaused, setIsPaused, startRecording, stopRecording, levels }}>
         <main className="w-full h-full relative m-auto max-w-screen-2xl">
           <div
