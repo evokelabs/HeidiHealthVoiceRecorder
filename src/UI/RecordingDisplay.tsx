@@ -1,20 +1,25 @@
 import { useEffect, useState } from 'react'
 
-export const RecordingDisplay = () => {
-  const RECORDING_PAUSED = 'recording paused'
-  const RECORDING = 'recording mic'
+const RECORDING_PAUSED = 'recording paused'
+const RECORDING = 'recording mic'
 
+export const RecordingDisplay = ({ isPaused }: { isPaused: boolean }) => {
   const [seconds, setSeconds] = useState(0)
+  const text = isPaused ? RECORDING_PAUSED : RECORDING
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setSeconds((prevSeconds) => prevSeconds + 1)
-    }, 1000)
+    let intervalId: NodeJS.Timeout
+
+    if (!isPaused) {
+      intervalId = setInterval(() => {
+        setSeconds((prevSeconds) => prevSeconds + 1)
+      }, 1000)
+    }
 
     return () => {
-      clearInterval(interval)
+      clearInterval(intervalId)
     }
-  }, [])
+  }, [isPaused])
 
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60)
@@ -43,7 +48,7 @@ export const RecordingDisplay = () => {
           <div className="bg-primary w-6 h-full"></div>
           <div className="bg-primary w-6 h-full"></div>
         </div>
-        <p className="uppercase text-lg font-semibold text-center select-none">{RECORDING}</p>
+        <p className="uppercase text-lg font-semibold text-center select-none">{text}</p>
       </div>
 
       <p className="text-lg font-semibold text-center select-none relative">{formatTime(seconds)}</p>
