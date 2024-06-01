@@ -28,7 +28,7 @@ export const RecordingDisplay = () => {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className="text-3xl rounded-[23px] bg-white p-4 border-primary border-[3px] w-56 shadow-inner relative overflow-hidden">
+      <div className="text-3xl rounded-[23px] bg-white p-4 border-primary border-[2px] w-56 shadow-inner relative overflow-hidden">
         <div className="w-full h-full absolute flex gap-0.5 left-0 bottom-0 opacity-15 transition-all ">
           <div className="bg-primary w-6 h-full"></div>
           <div className="bg-primary w-6 h-full"></div>

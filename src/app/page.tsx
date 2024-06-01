@@ -6,6 +6,7 @@ import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
 import { StopIconSVG } from '@/UI/SVG/StopIconSVG'
 import { TranscribeIconSVG } from '@/UI/SVG/TranscribeIconSVG'
 import { RecordingDisplay } from '@/UI/RecordingDisplay'
+import TranscribeTextArea from '@/UI/TranscribeTextArea'
 
 export default function Home() {
   return (
@@ -14,29 +15,32 @@ export default function Home() {
         <Logos />
       </div>
       <div className="h-full relative">
-        <div className="flex flex-col md:flex-row justify-center items-center gap-5 h-full">
-          <MainBigButton
-            iconSVG={<RecordIconSVG />}
-            caption={'start recording'}
-          />
-          <MainBigButton
-            iconSVG={<PauseIconSVG />}
-            caption={'pause recording'}
-          />
-          <MainBigButton
-            iconSVG={<StopIconSVG />}
-            caption={'stop recording'}
-          />
-          <MainBigButton
-            iconSVG={<TranscribeIconSVG />}
-            caption={'transcribe audio'}
-          />
-          <MainBigButton
-            iconSVG={<TranscribeIconSVG />}
-            caption={'transcribe audio'}
-            seconds={5}
-          />
-          <RecordingDisplay />
+        <div className="flex flex-col h-full justify-center">
+          <div className="flex flex-col md:flex-row justify-center items-center gap-5 ">
+            <MainBigButton
+              iconSVG={<RecordIconSVG />}
+              caption={'start recording'}
+            />
+            <MainBigButton
+              iconSVG={<PauseIconSVG />}
+              caption={'pause recording'}
+            />
+            <MainBigButton
+              iconSVG={<StopIconSVG />}
+              caption={'stop recording'}
+            />
+            <MainBigButton
+              iconSVG={<TranscribeIconSVG />}
+              caption={'transcribe audio'}
+            />
+            <MainBigButton
+              iconSVG={<TranscribeIconSVG />}
+              caption={'transcribe audio'}
+              seconds={5}
+            />
+            <RecordingDisplay />
+          </div>
+          <TranscribeTextArea />
         </div>
       </div>
     </main>
