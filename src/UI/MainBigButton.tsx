@@ -3,15 +3,13 @@ import { Dispatch, SetStateAction, useCallback, useEffect } from 'react'
 import { formatTime } from '@/libs/helpers'
 
 import { TranscribeIconSVG } from './SVG/TranscribeIconSVG'
-
-const HOVER_ON = 'duration-150'
-const HOVER_OFF = 'duration-0'
+import { OfflineAlert } from './OfflineAlert'
 
 const IconSVG = ({ iconSVG }: { iconSVG: JSX.Element }) => {
   return <div className="relative scale-50 md:scale-100 ">{iconSVG}</div>
 }
 
-const TranscribeTimerIcon = ({ seconds }: { seconds: number }) => {
+const IconTranscribeTimerSVG = ({ seconds }: { seconds: number }) => {
   return (
     <>
       <div className="relative scale-50 md:scale-100 bottom-1.5">
@@ -35,6 +33,12 @@ const MainBigButton = ({
   isPressed?: boolean
   setIsPressed?: Dispatch<SetStateAction<boolean>>
 }) => {
+  // Shows the timer length if transcribe SVG and seconds are passed
+  const hasTranscribeLength = iconSVG.type === TranscribeIconSVG && seconds
+
+  // Prevents distracting hover animation on record button while toggling pause/resume
+  const isMouseOverPlayPause = isPressed
+
   const resetPressed = useCallback(() => {
     if (!setIsPressed) return
     setIsPressed(false)
@@ -56,10 +60,10 @@ const MainBigButton = ({
         onMouseLeave={() => resetPressed()}>
         <div
           className={`w-20 h-20 md:w-[7rem] md:h-[7rem] rounded-full bg-white border-4 border-primary drop-shadow transition-all left-0 top-0 relative cursor-pointer flex flex-col justify-center items-center group-hover:drop-shadow-inverse group-hover:top-2 group-hover:left-2.5  ${
-            isPressed ? HOVER_OFF : HOVER_ON
+            isMouseOverPlayPause ? 'duration-0' : 'duration-150'
           }`}
           role="button">
-          {iconSVG.type === TranscribeIconSVG && seconds ? <TranscribeTimerIcon seconds={seconds} /> : <IconSVG iconSVG={iconSVG} />}
+          {hasTranscribeLength ? <IconTranscribeTimerSVG seconds={seconds} /> : <IconSVG iconSVG={iconSVG} />}
         </div>
         {/* {iconSVG.type === TranscribeIconSVG && <OfflineAlert />} */}
       </div>
