@@ -18,9 +18,9 @@ const TranscribeTimerIcon = ({ seconds }: { seconds: number }) => {
 
 const MainBigButton = ({ iconSVG, caption, seconds }: { iconSVG: JSX.Element; caption: string; seconds?: number }) => {
   return (
-    <div className="flex flex-col gap-4 relative">
+    <div className="flex flex-col gap-4 relative group">
       <div
-        className="w-20 h-20 md:w-[7rem] md:h-[7rem] rounded-full bg-white border-4 border-primary drop-shadow hover:drop-shadow-inverse transition-all left-0 top-0 hover:left-2.5 hover:top-2 relative cursor-pointer flex flex-col justify-center items-center"
+        className="w-20 h-20 md:w-[7rem] md:h-[7rem] rounded-full bg-white border-4 border-primary drop-shadow group-hover:drop-shadow-inverse transition-all left-0 top-0 group-hover:left-2.5 group-hover:top-2 relative cursor-pointer flex flex-col justify-center items-center"
         role="button">
         {iconSVG.type === TranscribeIconSVG && seconds ? <TranscribeTimerIcon seconds={seconds} /> : <IconSVG iconSVG={iconSVG} />}
       </div>
