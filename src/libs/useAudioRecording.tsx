@@ -1,22 +1,30 @@
-import { useState, useRef, useCallback, Dispatch, SetStateAction } from 'react'
+import { useState, useRef, useCallback, Dispatch, SetStateAction, useEffect } from 'react'
 
 const useAudioRecording = ({ isPaused, setIsPaused }: { isPaused: boolean; setIsPaused: Dispatch<SetStateAction<boolean>> }) => {
   const [recordedUrl, setRecordedUrl] = useState('')
   const [levels, setLevels] = useState<number[]>([])
   const mediaStream = useRef<MediaStream | null>(null)
   const mediaRecorder = useRef<MediaRecorder | null>(null)
-  const [microphoneError, setMicrophoneError] = useState<string | null>(null)
+  const [microphoneError, setMicrophoneError] = useState<string | null>('pending')
   const chunks = useRef<Blob[]>([])
   const audioContext = useRef<null | AudioContext>(null)
   const analyser = useRef<null | AnalyserNode>(null)
   const dataArray = useRef<null | Uint8Array>(null)
 
+  const [microphonePermission, setMicrophonePermission] = useState<'pending' | 'granted' | 'denied'>('pending')
+
   const isPausedRef = useRef(isPaused)
   isPausedRef.current = isPaused
 
   const startRecording = useCallback(async () => {
+    if (microphonePermission === 'denied') {
+      return
+    }
     try {
+      setMicrophonePermission('pending')
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+      setMicrophonePermission('granted')
+      setMicrophoneError(null)
       mediaStream.current = stream
       mediaRecorder.current = new MediaRecorder(stream)
 
@@ -66,9 +74,10 @@ const useAudioRecording = ({ isPaused, setIsPaused }: { isPaused: boolean; setIs
 
       mediaRecorder.current.start()
     } catch (err) {
+      setMicrophonePermission('denied')
       setMicrophoneError((err as Error).message)
     }
-  }, [isPaused])
+  }, [isPaused, microphoneError])
 
   const stopRecording = () => {
     if (mediaRecorder.current && mediaRecorder.current.state === 'recording') {
@@ -96,6 +105,38 @@ const useAudioRecording = ({ isPaused, setIsPaused }: { isPaused: boolean; setIs
       setIsPaused(false)
     }
   }, [setIsPaused])
+
+  useEffect(() => {
+    const checkMicrophonePermission = async () => {
+      try {
+        const permissionStatus = await navigator.permissions.query({ name: 'microphone' as PermissionName })
+
+        // Check the initial permission status
+        if (permissionStatus.state === 'denied') {
+          setMicrophonePermission('denied')
+          setMicrophoneError('Microphone access denied')
+        } else if (permissionStatus.state === 'granted') {
+          setMicrophonePermission('granted')
+          setMicrophoneError(null)
+        }
+
+        // Listen for changes to the permission status
+        permissionStatus.onchange = () => {
+          if (permissionStatus.state === 'denied') {
+            setMicrophonePermission('denied')
+            setMicrophoneError('Microphone access denied')
+          } else if (permissionStatus.state === 'granted') {
+            setMicrophonePermission('granted')
+            setMicrophoneError(null)
+          }
+        }
+      } catch (err) {
+        setMicrophoneError((err as Error).message)
+      }
+    }
+
+    checkMicrophonePermission()
+  }, [])
 
   return { startRecording, stopRecording, pauseRecording, resumeRecording, recordedUrl, levels, microphoneError }
 }
