@@ -16,7 +16,7 @@ export default function Home() {
         <Button iconSVG={<RecordIconSVG />} caption={'start recording'} />
         <Button iconSVG={<PauseIconSVG />} caption={'pause recording'} />
         <Button iconSVG={<StopIconSVG />} caption={'stop recording'} />
-        <Button iconSVG={<TranscribeIconSVG />} caption={'transcript audio'} />
+        <Button iconSVG={<TranscribeIconSVG />} caption={'transcribe audio'} />
       </div>
     </main>
   )
