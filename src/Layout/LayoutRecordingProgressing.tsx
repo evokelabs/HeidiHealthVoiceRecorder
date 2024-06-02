@@ -51,7 +51,7 @@ const LayoutRecordingProgressing = () => {
 
   return (
     <div
-      className="flex flex-row justify-center items-center gap-6 relative left-14 w-fit m-auto"
+      className="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-6 relative md:left-14 w-fit m-auto pt-10 md:pt-0"
       style={{ ...parentStyle, pointerEvents: microphoneError ? 'none' : 'auto' }}>
       <div
         className="relative duration-300 ease-out"

@@ -10,7 +10,7 @@ import useUserOffline from '@/libs/hooks/useUserOffline'
 
 // Default SVG button
 const IconSVG = ({ iconSVG }: { iconSVG: JSX.Element }) => {
-  return <div className="relative scale-50 md:scale-100 ">{iconSVG}</div>
+  return <div className="relative scale-[70%] md:scale-100 ">{iconSVG}</div>
 }
 
 // Alternative transcribe button with audio time length
