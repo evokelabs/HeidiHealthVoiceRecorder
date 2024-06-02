@@ -2,15 +2,13 @@
 import '@babel/polyfill'
 import { useState } from 'react'
 
-import { LayoutOptions } from '@/libs/types'
-
 import { Logos } from '@/UI/Logos'
 import { AudioContext } from '@/libs/context/AudioContext'
 import { UIContext } from '@/libs/context/UIContext'
 import { SpeechToTextContext } from '@/libs/context/SpeechToTextContext'
 
 import useAudioRecording from '@/libs/hooks/useAudioRecording'
-import { renderLayout, useLayoutState } from '@/libs/hooks/useLayoutState'
+import { LayoutOptions, renderLayout, useLayoutState } from '@/libs/hooks/useLayoutState'
 import useSpeechToText from '@/libs/hooks/useSpeechToText'
 
 const Home = () => {

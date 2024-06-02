@@ -1,8 +1,7 @@
 import { useContext } from 'react'
 
-import { LayoutOptions } from '@/libs/types'
 import { NEW_RECORDING, TRANSCRIBE_AUDIO } from '@/libs/constants'
-
+import { LayoutOptions } from '@/libs/hooks/useLayoutState'
 import { UIContext } from '@/libs/context/UIContext'
 
 import MainBigButton from '@/UI/MainBigButton'

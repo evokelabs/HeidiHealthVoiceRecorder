@@ -1,6 +1,5 @@
 import { useContext, useEffect } from 'react'
 
-import { LayoutOptions } from '@/libs/types'
 import { PAUSE_RECORDING, RESUME_RECORDING, STOP_RECORDING } from '@/libs/constants'
 
 import { UIContext } from '@/libs/context/UIContext'
@@ -12,6 +11,7 @@ import { PauseIconSVG } from '@/UI/SVG/PauseIconSVG'
 import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
 import { StopIconSVG } from '@/UI/SVG/StopIconSVG'
 import { SpeechToTextContext } from '@/libs/context/SpeechToTextContext'
+import { LayoutOptions } from '@/libs/hooks/useLayoutState'
 
 const LayoutRecordingProgressing = () => {
   const { setIsPressed, setLayout, layoutAnimateIn, layoutAnimateOut } = useContext(UIContext)

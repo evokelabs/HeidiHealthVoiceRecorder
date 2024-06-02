@@ -1,6 +1,5 @@
 import { useContext } from 'react'
 
-import { LayoutOptions } from '@/libs/types'
 import { NEW_RECORDING } from '@/libs/constants'
 
 import { UIContext } from '@/libs/context/UIContext'
@@ -10,6 +9,7 @@ import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
 import { AudioContext } from '@/libs/context/AudioContext'
 import TranscribeTextArea from '@/UI/TranscribeTextArea'
 import { SpeechToTextContext } from '@/libs/context/SpeechToTextContext'
+import { LayoutOptions } from '@/libs/hooks/useLayoutState'
 
 const LayoutRecordingFinished = () => {
   const { setLayout, layoutAnimateIn, layoutAnimateOut } = useContext(UIContext)

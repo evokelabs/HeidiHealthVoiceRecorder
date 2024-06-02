@@ -1,12 +1,12 @@
 import { useContext } from 'react'
 
-import { LayoutOptions } from '@/libs/types'
 import { START_RECORDING } from '@/libs/constants'
 
 import { UIContext } from '@/libs/context/UIContext'
 
 import MainBigButton from '@/UI/MainBigButton'
 import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
+import { LayoutOptions } from '@/libs/hooks/useLayoutState'
 
 const LayoutRecordingInit = () => {
   const { setLayout, setIsPressed } = useContext(UIContext)

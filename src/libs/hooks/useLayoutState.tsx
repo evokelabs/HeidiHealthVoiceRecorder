@@ -1,10 +1,16 @@
 import { useCallback, useState } from 'react'
-import { LayoutOptions } from '../types'
 import { TRANSITION_TIMING } from '../constants'
 import LayoutRecordingProgressing from '@/Layout/LayoutRecordingProgressing'
 import LayoutRecordingInit from '@/Layout/LayoutRecordingInit'
 import LayoutRecordingFinished from '@/Layout/LayoutRecordingFinished'
 import LayoutRecordingTranscribe from '@/Layout/LayoutRecordingTranscribe'
+
+export const enum LayoutOptions {
+  LayoutRecordingInit,
+  LayoutRecordingProgressing,
+  LayoutRecordingTranscribe,
+  LayoutRecordingFinished,
+}
 
 export const renderLayout = (layout: LayoutOptions) => {
   switch (layout) {
