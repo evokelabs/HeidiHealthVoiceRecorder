@@ -9,10 +9,12 @@ import MainBigButton from '@/UI/MainBigButton'
 import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
 import { AudioContext } from '@/libs/AudioContext'
 import TranscribeTextArea from '@/UI/TranscribeTextArea'
+import { SpeechToTextContext } from '@/libs/SpeechToTextContext'
 
 const LayoutRecordingFinished = () => {
   const { setLayout, layoutAnimateIn, layoutAnimateOut } = useContext(UIContext)
   const { setIsPaused } = useContext(AudioContext)
+  const { resetSpeechRecognition } = useContext(SpeechToTextContext)
 
   //Animation transitions for the layout
   const generateAnimationStyles = () => {
@@ -42,6 +44,7 @@ const LayoutRecordingFinished = () => {
       style={parentStyle}>
       <div
         onClick={() => {
+          resetSpeechRecognition()
           setLayout(LayoutOptions.LayoutRecordingProgressing)
           setIsPaused(false)
         }}>

@@ -10,12 +10,13 @@ import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
 import { TranscribeIconSVG } from '@/UI/SVG/TranscribeIconSVG'
 import { AudioContext } from '@/libs/AudioContext'
 import useUserOffline from '@/libs/useUserOffline'
+import { SpeechToTextContext } from '@/libs/SpeechToTextContext'
 
 const LayoutRecordingTranscribe = () => {
   const { setLayout, layoutAnimateIn, layoutAnimateOut } = useContext(UIContext)
   const { setIsPaused } = useContext(AudioContext)
   const { userIsOffline } = useUserOffline()
-
+  const { resetSpeechRecognition } = useContext(SpeechToTextContext)
   //Animation transitions for the layout
   const generateAnimationStyles = (direction: string) => {
     const styles = {
@@ -43,6 +44,7 @@ const LayoutRecordingTranscribe = () => {
         className="relative duration-300 ease-out"
         style={animationRightStyles}
         onClick={() => {
+          resetSpeechRecognition()
           setLayout(LayoutOptions.LayoutRecordingProgressing)
           setIsPaused(false)
         }}>
