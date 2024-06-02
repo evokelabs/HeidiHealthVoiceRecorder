@@ -11,20 +11,29 @@ import RecordingDisplay from '@/UI/RecordingDisplay'
 import { PauseIconSVG } from '@/UI/SVG/PauseIconSVG'
 import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
 import { StopIconSVG } from '@/UI/SVG/StopIconSVG'
+import { SpeechToTextContext } from '@/libs/SpeechToTextContext'
 
 const LayoutRecordingProgressing = () => {
   const { setIsPressed, setLayout, layoutAnimateIn, layoutAnimateOut } = useContext(UIContext)
   const { isPaused, setIsPaused, startRecording, stopRecording, microphoneError } = useContext(AudioContext)
 
+  const { startSpeechRecognition, stopSpeechRecognition } = useContext(SpeechToTextContext)
+
   //Start recording on component mount
   useEffect(() => {
     startRecording()
-  }, [startRecording])
+    startSpeechRecognition()
+  }, [startRecording, startSpeechRecognition])
 
   //Pause or resume recording
   const togglePause = () => {
     setIsPaused(!isPaused)
     setIsPressed(true)
+    if (isPaused) {
+      stopSpeechRecognition()
+    } else {
+      startSpeechRecognition()
+    }
   }
 
   //Animation transitions for the layout

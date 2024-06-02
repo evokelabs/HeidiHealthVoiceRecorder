@@ -10,7 +10,6 @@ import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
 
 const LayoutRecordingInit = () => {
   const { setLayout, setIsPressed } = useContext(UIContext)
-
   return (
     <div className="flex flex-col md:flex-row justify-center items-center gap-5 duration-200 relative">
       <div

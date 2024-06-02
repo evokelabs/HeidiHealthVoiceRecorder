@@ -4,19 +4,19 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 const useSpeechToText = () => {
   const { transcript, resetTranscript, browserSupportsSpeechRecognition } = useSpeechRecognition()
 
-  const start = () => {
+  const startSpeechRecognition = () => {
     SpeechRecognition.startListening({ continuous: true })
   }
 
-  const stop = () => {
+  const stopSpeechRecognition = () => {
     SpeechRecognition.stopListening()
   }
 
-  const reset = () => {
+  const resetSpeechRecognition = () => {
     resetTranscript()
   }
 
-  return { transcript, start, stop, reset, browserSupportsSpeechRecognition }
+  return { transcript, startSpeechRecognition, stopSpeechRecognition, resetSpeechRecognition, browserSupportsSpeechRecognition }
 }
 
 export default useSpeechToText

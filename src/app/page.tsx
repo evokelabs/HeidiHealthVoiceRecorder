@@ -19,12 +19,14 @@ const Home = () => {
   const [isPaused, setIsPaused] = useState(false)
   const [seconds, setSeconds] = useState(0)
   const { startRecording, stopRecording, levels, microphoneError } = useAudioRecording({ isPaused, setIsPaused })
-  const speechToText = useSpeechToText()
+  const { transcript, startSpeechRecognition, stopSpeechRecognition, resetSpeechRecognition, browserSupportsSpeechRecognition } =
+    useSpeechToText()
 
   return (
     <UIContext.Provider value={{ layout, setLayout, isPressed, setIsPressed, layoutAnimateOut, layoutAnimateIn }}>
       <AudioContext.Provider value={{ seconds, setSeconds, isPaused, setIsPaused, startRecording, stopRecording, levels, microphoneError }}>
-        <SpeechToTextContext.Provider value={speechToText}>
+        <SpeechToTextContext.Provider
+          value={{ transcript, startSpeechRecognition, stopSpeechRecognition, resetSpeechRecognition, browserSupportsSpeechRecognition }}>
           <main className="w-full h-full relative m-auto max-w-screen-2xl">
             <div
               className="flex justify-center mt-6 absolute w-full z-10 cursor-pointer"
