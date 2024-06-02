@@ -13,8 +13,34 @@ const useAudioRecording = ({ isPaused, setIsPaused }: { isPaused: boolean; setIs
 
   const [microphonePermission, setMicrophonePermission] = useState<'pending' | 'granted' | 'denied'>('pending')
 
+  const isPausedRef = useRef(isPaused)
+  useEffect(() => {
+    isPausedRef.current = isPaused
+  }, [isPaused])
+
+  const updateAudioLevels = useCallback(() => {
+    if (analyser.current && dataArray.current) {
+      analyser.current.getByteFrequencyData(dataArray.current)
+      const dataCopy = Array.from(dataArray.current)
+      const logDataCopy = dataCopy.map(
+        (value, index, array) => array[Math.round(Math.log10(index + 1) * (array.length / Math.log10(array.length)))]
+      )
+      const maxVal = 20
+      const groupSize = Math.floor(logDataCopy.length / 240)
+      const reducedData = Array.from({ length: 12 }, (_, i) => {
+        let average = Math.round(logDataCopy.slice(i * groupSize, (i + 1) * groupSize).reduce((a, b) => a + b, 0) / groupSize)
+        average = isNaN(average) ? 0 : average
+        return 10 + Math.round((average / maxVal) * 15)
+      })
+      setLevels(reducedData)
+    }
+
+    if (!isPausedRef.current) {
+      setTimeout(() => requestAnimationFrame(updateAudioLevels), 50)
+    }
+  }, [isPausedRef, analyser, dataArray, setLevels])
+
   const startRecording = useCallback(async () => {
-    console.log('startRecording isPaused', isPaused)
     if (microphonePermission === 'denied') {
       return
     }
@@ -33,50 +59,24 @@ const useAudioRecording = ({ isPaused, setIsPaused }: { isPaused: boolean; setIs
       const source = audioContext.current.createMediaStreamSource(stream)
       source.connect(analyser.current)
 
-      const updateAudioLevels = () => {
-        console.log('updateAudioLevels isPaused', isPaused)
-        if (analyser.current && dataArray.current) {
-          analyser.current.getByteFrequencyData(dataArray.current)
-          const dataCopy = Array.from(dataArray.current)
-          const logDataCopy = dataCopy.map(
-            (value, index, array) => array[Math.round(Math.log10(index + 1) * (array.length / Math.log10(array.length)))]
-          )
-          const maxVal = 20
-          const groupSize = Math.floor(logDataCopy.length / 240)
-          const reducedData = Array.from({ length: 12 }, (_, i) => {
-            let average = Math.round(logDataCopy.slice(i * groupSize, (i + 1) * groupSize).reduce((a, b) => a + b, 0) / groupSize)
-            average = isNaN(average) ? 0 : average
-            return 10 + Math.round((average / maxVal) * 15)
-          })
-          setLevels(reducedData)
-        }
-
-        if (!isPaused) {
-          setTimeout(() => requestAnimationFrame(updateAudioLevels), 50)
-        }
-      }
-
-      updateAudioLevels()
-
       mediaRecorder.current.ondataavailable = (e) => {
         if (e.data.size > 0) {
           chunks.current.push(e.data)
         }
       }
-
       mediaRecorder.current.onstop = () => {
         const recordedBlob = new Blob(chunks.current, { type: 'audio/webm' })
         const url = URL.createObjectURL(recordedBlob)
         setRecordedUrl(url)
         chunks.current = []
       }
-
       mediaRecorder.current.start()
+      updateAudioLevels()
     } catch (err) {
       setMicrophonePermission('denied')
       setMicrophoneError((err as Error).message)
     }
-  }, [isPaused, microphonePermission])
+  }, [microphonePermission, updateAudioLevels])
 
   const stopRecording = () => {
     if (mediaRecorder.current && mediaRecorder.current.state === 'recording') {
@@ -104,6 +104,12 @@ const useAudioRecording = ({ isPaused, setIsPaused }: { isPaused: boolean; setIs
       setIsPaused(false)
     }
   }, [setIsPaused])
+
+  useEffect(() => {
+    if (!isPausedRef.current) {
+      updateAudioLevels()
+    }
+  }, [isPausedRef.current, updateAudioLevels])
 
   useEffect(() => {
     const checkMicrophonePermission = async () => {
