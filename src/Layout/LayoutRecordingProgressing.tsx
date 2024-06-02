@@ -23,18 +23,7 @@ const LayoutRecordingProgressing = () => {
   useEffect(() => {
     startRecording()
     startSpeechRecognition()
-  }, [startRecording, startSpeechRecognition])
-
-  //Pause or resume recording
-  const togglePause = () => {
-    setIsPaused(!isPaused)
-    setIsPressed(true)
-    if (isPaused) {
-      stopSpeechRecognition()
-    } else {
-      startSpeechRecognition()
-    }
-  }
+  }, [])
 
   //Animation transitions for the layout
   const generateAnimationStyles = (direction: string) => {
@@ -76,13 +65,31 @@ const LayoutRecordingProgressing = () => {
         />
       </div>
 
-      <div onClick={togglePause}>
-        <MainBigButton
-          iconSVG={isPaused ? <RecordIconSVG /> : <PauseIconSVG />}
-          caption={isPaused ? RESUME_RECORDING : PAUSE_RECORDING}
-        />
-      </div>
-
+      {isPaused ? (
+        <div
+          onClick={() => {
+            setIsPaused(false)
+            setIsPressed(true)
+            startSpeechRecognition()
+          }}>
+          <MainBigButton
+            iconSVG={<RecordIconSVG />}
+            caption={RESUME_RECORDING}
+          />
+        </div>
+      ) : (
+        <div
+          onClick={() => {
+            setIsPaused(true)
+            setIsPressed(true)
+            stopSpeechRecognition()
+          }}>
+          <MainBigButton
+            iconSVG={<PauseIconSVG />}
+            caption={PAUSE_RECORDING}
+          />
+        </div>
+      )}
       <div
         className="relative duration-300 ease-out"
         style={animationRightStyles}>

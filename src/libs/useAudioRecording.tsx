@@ -13,10 +13,8 @@ const useAudioRecording = ({ isPaused, setIsPaused }: { isPaused: boolean; setIs
 
   const [microphonePermission, setMicrophonePermission] = useState<'pending' | 'granted' | 'denied'>('pending')
 
-  const isPausedRef = useRef(isPaused)
-  isPausedRef.current = isPaused
-
   const startRecording = useCallback(async () => {
+    console.log('startRecording isPaused', isPaused)
     if (microphonePermission === 'denied') {
       return
     }
@@ -36,7 +34,7 @@ const useAudioRecording = ({ isPaused, setIsPaused }: { isPaused: boolean; setIs
       source.connect(analyser.current)
 
       const updateAudioLevels = () => {
-        if (isPausedRef.current) return
+        console.log('updateAudioLevels isPaused', isPaused)
         if (analyser.current && dataArray.current) {
           analyser.current.getByteFrequencyData(dataArray.current)
           const dataCopy = Array.from(dataArray.current)
@@ -57,6 +55,7 @@ const useAudioRecording = ({ isPaused, setIsPaused }: { isPaused: boolean; setIs
           setTimeout(() => requestAnimationFrame(updateAudioLevels), 50)
         }
       }
+
       updateAudioLevels()
 
       mediaRecorder.current.ondataavailable = (e) => {
@@ -77,7 +76,7 @@ const useAudioRecording = ({ isPaused, setIsPaused }: { isPaused: boolean; setIs
       setMicrophonePermission('denied')
       setMicrophoneError((err as Error).message)
     }
-  }, [isPaused, microphoneError])
+  }, [isPaused, microphonePermission])
 
   const stopRecording = () => {
     if (mediaRecorder.current && mediaRecorder.current.state === 'recording') {

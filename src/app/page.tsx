@@ -1,5 +1,5 @@
 'use client'
-
+import '@babel/polyfill'
 import { useState } from 'react'
 
 import { LayoutOptions } from '@/libs/types'
