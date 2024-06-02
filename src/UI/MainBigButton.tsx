@@ -4,9 +4,9 @@ import { formatTime } from '@/libs/helpers'
 
 import { TranscribeIconSVG } from './SVG/TranscribeIconSVG'
 import { OfflineAlert } from './OfflineAlert'
-import { AudioContext } from '@/libs/AudioContext'
-import { UIContext } from '@/libs/UIContext'
-import useUserOffline from '@/libs/useUserOffline'
+import { AudioContext } from '@/libs/context/AudioContext'
+import { UIContext } from '@/libs/context/UIContext'
+import useUserOffline from '@/libs/hooks/useUserOffline'
 
 // Default SVG button
 const IconSVG = ({ iconSVG }: { iconSVG: JSX.Element }) => {

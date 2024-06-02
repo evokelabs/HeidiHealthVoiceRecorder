@@ -3,18 +3,17 @@ import { useContext } from 'react'
 import { LayoutOptions } from '@/libs/types'
 import { NEW_RECORDING } from '@/libs/constants'
 
-import { UIContext } from '@/libs/UIContext'
+import { UIContext } from '@/libs/context/UIContext'
 
 import MainBigButton from '@/UI/MainBigButton'
 import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
-import { AudioContext } from '@/libs/AudioContext'
+import { AudioContext } from '@/libs/context/AudioContext'
 import TranscribeTextArea from '@/UI/TranscribeTextArea'
-import { SpeechToTextContext } from '@/libs/SpeechToTextContext'
+import { SpeechToTextContext } from '@/libs/context/SpeechToTextContext'
 
 const LayoutRecordingFinished = () => {
   const { setLayout, layoutAnimateIn, layoutAnimateOut } = useContext(UIContext)
   const { setIsPaused } = useContext(AudioContext)
-  const { resetSpeechRecognition } = useContext(SpeechToTextContext)
 
   //Animation transitions for the layout
   const generateAnimationStyles = () => {
@@ -44,7 +43,6 @@ const LayoutRecordingFinished = () => {
       style={parentStyle}>
       <div
         onClick={() => {
-          resetSpeechRecognition()
           setLayout(LayoutOptions.LayoutRecordingProgressing)
           setIsPaused(false)
         }}>

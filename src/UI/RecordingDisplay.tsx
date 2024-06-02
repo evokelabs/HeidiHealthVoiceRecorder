@@ -5,8 +5,8 @@ import { formatTime } from '@/libs/helpers'
 import { PauseIconSVG } from './SVG/PauseIconSVG'
 import { RecordIconSVG } from './SVG/RecordIconSVG'
 import { ERROR_MIC, RECORDING_MIC, RECORDING_PAUSED } from '@/libs/constants'
-import { AudioContext } from '@/libs/AudioContext'
-import { useTimer } from '@/libs/useTimer'
+import { AudioContext } from '@/libs/context/AudioContext'
+import { useTimer } from '@/libs/hooks/useTimer'
 
 const LEDIcon = ({ Icon, className }: { Icon: React.ElementType; className: string }) => (
   <div className={`absolute ${className}`}>

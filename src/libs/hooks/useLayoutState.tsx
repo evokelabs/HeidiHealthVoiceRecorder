@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
-import { LayoutOptions } from './types'
-import { TRANSITION_TIMING } from './constants'
+import { LayoutOptions } from '../types'
+import { TRANSITION_TIMING } from '../constants'
 import LayoutRecordingProgressing from '@/Layout/LayoutRecordingProgressing'
 import LayoutRecordingInit from '@/Layout/LayoutRecordingInit'
 import LayoutRecordingFinished from '@/Layout/LayoutRecordingFinished'

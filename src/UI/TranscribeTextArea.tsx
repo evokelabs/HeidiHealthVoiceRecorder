@@ -1,4 +1,4 @@
-import { SpeechToTextContext } from '@/libs/SpeechToTextContext'
+import { SpeechToTextContext } from '@/libs/context/SpeechToTextContext'
 import { NO_TRANSCRIBE } from '@/libs/constants'
 import { useContext } from 'react'
 

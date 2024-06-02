@@ -3,14 +3,14 @@ import { useContext } from 'react'
 import { LayoutOptions } from '@/libs/types'
 import { NEW_RECORDING, TRANSCRIBE_AUDIO } from '@/libs/constants'
 
-import { UIContext } from '@/libs/UIContext'
+import { UIContext } from '@/libs/context/UIContext'
 
 import MainBigButton from '@/UI/MainBigButton'
 import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
 import { TranscribeIconSVG } from '@/UI/SVG/TranscribeIconSVG'
-import { AudioContext } from '@/libs/AudioContext'
-import useUserOffline from '@/libs/useUserOffline'
-import { SpeechToTextContext } from '@/libs/SpeechToTextContext'
+import { AudioContext } from '@/libs/context/AudioContext'
+import useUserOffline from '@/libs/hooks/useUserOffline'
+import { SpeechToTextContext } from '@/libs/context/SpeechToTextContext'
 
 const LayoutRecordingTranscribe = () => {
   const { setLayout, layoutAnimateIn, layoutAnimateOut } = useContext(UIContext)

@@ -5,22 +5,26 @@ import { useState } from 'react'
 import { LayoutOptions } from '@/libs/types'
 
 import { Logos } from '@/UI/Logos'
-import { AudioContext } from '@/libs/AudioContext'
-import { UIContext } from '@/libs/UIContext'
-import { SpeechToTextContext } from '@/libs/SpeechToTextContext'
+import { AudioContext } from '@/libs/context/AudioContext'
+import { UIContext } from '@/libs/context/UIContext'
+import { SpeechToTextContext } from '@/libs/context/SpeechToTextContext'
 
-import useAudioRecording from '@/libs/useAudioRecording'
-import { renderLayout, useLayoutState } from '@/libs/useLayoutState'
-import useSpeechToText from '@/libs/useSpeechToText'
+import useAudioRecording from '@/libs/hooks/useAudioRecording'
+import { renderLayout, useLayoutState } from '@/libs/hooks/useLayoutState'
+import useSpeechToText from '@/libs/hooks/useSpeechToText'
 
 const Home = () => {
+  // Layout Context states
   const { layout, setLayout, resetLayout, layoutAnimateIn, layoutAnimateOut } = useLayoutState(LayoutOptions.LayoutRecordingInit)
-  const [isPressed, setIsPressed] = useState(false)
+  // Audio Context states
   const [isPaused, setIsPaused] = useState(false)
   const [seconds, setSeconds] = useState(0)
   const { startRecording, stopRecording, levels, microphoneError } = useAudioRecording({ isPaused, setIsPaused })
+  // Speech to Text Context states
   const { transcript, startSpeechRecognition, stopSpeechRecognition, resetSpeechRecognition, browserSupportsSpeechRecognition } =
     useSpeechToText()
+  // UI Context states
+  const [isPressed, setIsPressed] = useState(false)
 
   return (
     <UIContext.Provider value={{ layout, setLayout, isPressed, setIsPressed, layoutAnimateOut, layoutAnimateIn }}>

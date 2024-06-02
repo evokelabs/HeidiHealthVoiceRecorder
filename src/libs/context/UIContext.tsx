@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { LayoutOptions } from './types'
+import { LayoutOptions } from '../types'
 
 export interface UIContextType {
   layout: LayoutOptions

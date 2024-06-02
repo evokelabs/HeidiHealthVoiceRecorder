@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { LayoutOptions } from '@/libs/types'
 import { START_RECORDING } from '@/libs/constants'
 
-import { UIContext } from '@/libs/UIContext'
+import { UIContext } from '@/libs/context/UIContext'
 
 import MainBigButton from '@/UI/MainBigButton'
 import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
