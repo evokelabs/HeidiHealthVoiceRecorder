@@ -1,6 +1,3 @@
-import '@babel/polyfill'
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
-
 import { useState, useRef, useCallback, Dispatch, SetStateAction, useEffect } from 'react'
 
 const useAudioRecording = ({ isPaused, setIsPaused }: { isPaused: boolean; setIsPaused: Dispatch<SetStateAction<boolean>> }) => {
@@ -19,11 +16,6 @@ const useAudioRecording = ({ isPaused, setIsPaused }: { isPaused: boolean; setIs
   const isPausedRef = useRef(isPaused)
   isPausedRef.current = isPaused
 
-  // Speech to text
-  const { transcript, resetTranscript, browserSupportsSpeechRecognition } = useSpeechRecognition()
-
-  console.log(browserSupportsSpeechRecognition)
-
   const startRecording = useCallback(async () => {
     if (microphonePermission === 'denied') {
       return
@@ -35,9 +27,6 @@ const useAudioRecording = ({ isPaused, setIsPaused }: { isPaused: boolean; setIs
       setMicrophoneError(null)
       mediaStream.current = stream
       mediaRecorder.current = new MediaRecorder(stream)
-      //Speech to Text
-      resetTranscript()
-      SpeechRecognition.startListening({ continuous: true })
 
       audioContext.current = new AudioContext()
       analyser.current = audioContext.current.createAnalyser()
@@ -92,7 +81,6 @@ const useAudioRecording = ({ isPaused, setIsPaused }: { isPaused: boolean; setIs
 
   const stopRecording = () => {
     if (mediaRecorder.current && mediaRecorder.current.state === 'recording') {
-      SpeechRecognition.stopListening()
       mediaRecorder.current.stop()
     }
 
