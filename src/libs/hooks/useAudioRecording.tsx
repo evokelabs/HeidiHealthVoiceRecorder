@@ -48,6 +48,7 @@ const useAudioRecording = ({ isPaused, setIsPaused }: { isPaused: boolean; setIs
       setMicrophonePermission('pending')
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
       setMicrophonePermission('granted')
+
       setMicrophoneError(null)
       mediaStream.current = stream
       mediaRecorder.current = new MediaRecorder(stream)

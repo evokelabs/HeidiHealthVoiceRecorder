@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 
 import { formatTime } from '@/libs/helpers'
 
@@ -28,6 +28,13 @@ const RecordingDisplay = () => {
 
   const resetTimer = true
   useTimer(isPaused, resetTimer, seconds, setSeconds)
+
+  // Reset counter when mic block is fixed
+  useEffect(() => {
+    if (!errorText) {
+      setSeconds(0)
+    }
+  }, [errorText, setSeconds])
 
   return (
     <div className="flex flex-col relative">
