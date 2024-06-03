@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "preinstall": "rm -rf node_modules package-lock.json",
+    "postinstall": "npm ls next",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.24.6",
-    "next": "latest",
+    "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
     "react-speech-recognition": "^3.10.0"
