@@ -1,5 +1,4 @@
 'use client'
-import '@babel/polyfill'
 import { useState } from 'react'
 
 import { Logos } from '@/UI/Logos'
