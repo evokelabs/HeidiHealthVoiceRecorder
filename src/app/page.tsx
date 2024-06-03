@@ -1,4 +1,5 @@
 'use client'
+import '@babel/runtime/regenerator'
 import { useState } from 'react'
 
 import { Logos } from '@/UI/Logos'
