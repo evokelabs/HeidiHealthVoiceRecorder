@@ -13,18 +13,10 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
-
-      - name: Cache Node.js modules
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          node-version: '14'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Verify Next.js installation
         run: npm list next
