@@ -8,7 +8,6 @@ import MainBigButton from '@/UI/MainBigButton'
 import { RecordIconSVG } from '@/UI/SVG/RecordIconSVG'
 import { AudioContext } from '@/libs/context/AudioContext'
 import TranscribeTextArea from '@/UI/TranscribeTextArea'
-import { SpeechToTextContext } from '@/libs/context/SpeechToTextContext'
 import { LayoutOptions } from '@/libs/hooks/useLayoutState'
 
 const LayoutRecordingFinished = () => {
