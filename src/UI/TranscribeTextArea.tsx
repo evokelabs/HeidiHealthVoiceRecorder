@@ -7,7 +7,9 @@ const TranscribeTextArea = () => {
   const textToDisplay = transcript || NO_TRANSCRIBE
 
   return (
-    <div className="rounded-2xl p-4 relative bg-white border-primary border-2 mx-10 h-full">
+    <div
+      data-testid="transcribe-text-area"
+      className="rounded-2xl p-4 relative bg-white border-primary border-2 mx-10 h-full">
       <p className="text-left font-semibold text-base md:text-lg ">
         {textToDisplay.split(' ').map((word, index) => (
           <span

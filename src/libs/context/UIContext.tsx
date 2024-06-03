@@ -11,7 +11,7 @@ export interface UIContextType {
 }
 
 export const UIContext = createContext<UIContextType>({
-  layout: LayoutOptions.LayoutRecordingInit,
+  layout: 0,
   setLayout: () => {},
   isPressed: false,
   setIsPressed: () => {},
