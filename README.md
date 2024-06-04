@@ -1,7 +1,9 @@
 # Heidi Health Voice Recorder 
 ### Links:
-[Voice Recorder - Vercel Live App](https://heidi-health-voice-recorder.vercel.app/) 
+[Voice Recorder - Vercel Live App](https://heidi-health-voice-recorder.vercel.app/)
+
 [Video Presentation](https://youtu.be/Ckq4ZwygnMY)
+
 [Figma Designs](https://www.figma.com/design/aysPLxKVbjWo8HIioAyFR0/Heidi-Health-Coding-Challenge?node-id=0-1&t=falpbeV8aDRZ1Aog-1)
 
 ### Features:
@@ -16,7 +18,7 @@
 - Testing for critical components using Jest and RTL
 - Implements a CI/CD pipeline for automatically testing with GitHub actions that deploys to Vercel
 
-![alt text](public/img/logos-github.webp)
+
 
 
 
